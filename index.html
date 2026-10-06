@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pola.web · Webs y sistemas a medida para tu negocio</title>
+<meta name="description" content="Diseño webs y sistemas de gestión a medida para emprendimientos y negocios: turnos, reservas, clientes, pagos y pedidos. Pagás una vez y es tuyo. Pilar, Buenos Aires.">
+<meta property="og:title" content="pola.web · Webs y sistemas a medida">
+<meta property="og:description" content="Tu negocio, ordenado y en internet. Webs y sistemas a medida: pagás una vez y es tuyo.">
+<meta property="og:image" content="https://somospola.com/img/pola-logo.png">
+<meta property="og:url" content="https://somospola.com/">
+<meta name="theme-color" content="#0E3A46">
+<link rel="icon" href="img/pola-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --petrol: #0E3A46; --petrol-2: #15505f; --salmon: #FF6F6F; --cream: #FFF4E9; --choco: #3A2A23; --powder: #EBB4B0;
+    --paper: #FFF9F2; --muted: #6b5a51; --line: #ead9c9;
+    --radius: 22px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--cream); color: var(--choco);
+    font: 17px/1.6 "DM Sans", system-ui, sans-serif;
+    background-image: radial-gradient(rgba(58,42,35,.05) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.12; margin: 0; color: var(--petrol); letter-spacing: -.01em; }
+  h1 { font-size: clamp(2.3rem, 6vw, 4.2rem); }
+  h2 { font-size: clamp(1.9rem, 4.2vw, 2.9rem); }
+  h3 { font-size: 1.35rem; }
+  .hand { font-family: Caveat, cursive; color: var(--salmon); font-size: 1.6rem; line-height: 1; }
+  .kicker { text-transform: uppercase; letter-spacing: .22em; font-size: .78rem; font-weight: 700; color: var(--salmon); margin: 0 0 12px; }
+  section { padding: 88px 0; }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 46ch; }
+
+  /* Botones */
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 24px; border-radius: 999px; font-weight: 700; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-main { background: var(--salmon); color: #fff; box-shadow: 0 10px 24px -10px rgba(255,111,111,.8); }
+  .btn-ghost { border: 2px solid var(--petrol); color: var(--petrol); }
+  .btn svg { width: 20px; height: 20px; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 10; background: rgba(255,244,233,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand svg { height: 30px; width: auto; }
+  .brand span { letter-spacing: .3em; font-size: .85rem; color: var(--petrol); font-weight: 500; }
+  .nav nav { display: flex; gap: 26px; font-weight: 500; font-size: .95rem; }
+  .nav nav a { text-decoration: none; color: var(--petrol); }
+  .nav nav a:hover { color: var(--salmon); }
+  .nav .btn { padding: 10px 18px; font-size: .92rem; }
+  @media (max-width: 820px) { .nav nav { display: none; } }
+
+  /* Hero */
+  .hero { padding: 64px 0 96px; position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .hero h1 em { font-style: normal; color: var(--salmon); }
+  .hero .lead { margin: 22px 0 32px; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero .note { margin-top: 22px; }
+  .phone { position: relative; justify-self: center; width: min(320px, 80vw); }
+  .phone .frame { border-radius: 38px; padding: 10px; background: var(--petrol); box-shadow: 0 30px 60px -25px rgba(14,58,70,.55); transform: rotate(2.5deg); }
+  .phone .frame img { border-radius: 30px; }
+  .tape { position: absolute; width: 110px; height: 30px; background: rgba(235,180,176,.75); top: -12px; left: 50%; transform: translateX(-50%) rotate(-4deg); }
+  .phone .hand { position: absolute; left: -96px; bottom: 70px; transform: rotate(-6deg); }
+  .blob { position: absolute; z-index: -1; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .phone .hand { left: -10px; bottom: -40px; } }
+
+  /* Por qué */
+  .why { background: var(--petrol); color: var(--cream); }
+  .why h2, .why h3 { color: var(--cream); }
+  .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
+  .why .card { background: var(--petrol-2); border-radius: var(--radius); padding: 28px; }
+  .why .card p { color: #d9e6e9; margin: 10px 0 0; }
+  .icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--salmon); margin-bottom: 18px; }
+  .icon svg { width: 24px; height: 24px; }
+  @media (max-width: 820px) { .cards3 { grid-template-columns: 1fr; } }
+
+  /* Servicios */
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; align-items: stretch; }
+  .plan { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; display: flex; flex-direction: column; }
+  .plan.star { background: var(--petrol); color: var(--cream); border: 0; transform: translateY(-10px); box-shadow: 0 24px 50px -24px rgba(14,58,70,.6); }
+  .plan.star h3 { color: var(--cream); }
+  .plan .price { font-family: Fraunces, serif; font-size: 2.1rem; color: var(--salmon); margin: 14px 0 6px; line-height: 1.1; }
+  .plan .price small { display: block; font-family: "DM Sans", sans-serif; font-size: .85rem; color: inherit; opacity: .75; margin-top: 4px; }
+  .plan ul { padding-left: 1.1rem; margin: 16px 0 0; flex: 1; }
+  .plan li { margin: 6px 0; }
+  .plan .tag { align-self: flex-start; background: var(--salmon); color: #fff; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; margin-bottom: 12px; }
+  .own { margin-top: 34px; display: flex; gap: 14px; align-items: center; background: var(--paper); border: 2px dashed var(--powder); border-radius: var(--radius); padding: 20px 24px; }
+  .own strong { color: var(--petrol); }
+  @media (max-width: 900px) { .plans { grid-template-columns: 1fr; } .plan.star { transform: none; } }
+
+  /* Proyectos */
+  .projects { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .proj { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; margin-top: 56px; }
+  .proj.flip .shot { order: 2; }
+  .shot { position: relative; }
+  .shot img { border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 22px 44px -26px rgba(58,42,35,.45); background: #fff; }
+  .shot.tall { max-width: 260px; justify-self: center; }
+  .shot .tape { top: -14px; }
+  .proj p { color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+  .chips li { background: var(--cream); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: .88rem; color: var(--petrol); }
+  .demo { font-size: .82rem; color: var(--muted); margin-top: 10px; font-style: italic; }
+  @media (max-width: 860px) { .proj { grid-template-columns: 1fr; } .proj.flip .shot { order: 0; } }
+
+  /* Proceso */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 44px; counter-reset: s; }
+  .step { position: relative; padding-top: 58px; }
+  .step::before { counter-increment: s; content: counter(s); position: absolute; top: 0; left: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--salmon); color: #fff; display: grid; place-items: center; font-family: Fraunces, serif; font-size: 1.3rem; }
+  .step p { color: var(--muted); margin: 8px 0 0; }
+  @media (max-width: 860px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  .faq { max-width: 780px; margin: 36px auto 0; }
+  details { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; margin-bottom: 12px; }
+  summary { cursor: pointer; font-weight: 700; color: var(--petrol); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::after { content: "+"; color: var(--salmon); font-size: 1.4rem; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { margin: 12px 0 0; color: var(--muted); }
+
+  /* Contacto */
+  .contact { background: var(--salmon); color: #fff; text-align: center; position: relative; overflow: hidden; }
+  .contact h2 { color: #fff; }
+  .contact .lead { color: #fff; margin: 16px auto 30px; opacity: .95; }
+  .contact .btn-main { background: var(--petrol); box-shadow: none; }
+  .contact .btn-ghost { border-color: #fff; color: #fff; }
+  .contact .ctas { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+  .contact .hand { color: var(--petrol); font-size: 1.8rem; margin-top: 26px; display: block; }
+
+  footer { background: var(--petrol); color: #c9d8dc; padding: 34px 0; font-size: .92rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+  footer a { color: var(--cream); }
+  .center { text-align: center; }
+  .center .lead { margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#" aria-label="pola.web, inicio">
+      <svg viewBox="222 299 828 667" fill="#FF6F6F" aria-hidden="true"><rect x="222" y="452" width="188" height="514"/><path d="M452 452 H474 A160 160 0 0 1 474 772 H452 Z"/><path d="M667 824 V299 A205 205 0 0 1 872 504 V824 Z"/><rect x="667" y="855" width="383" height="110"/></svg>
+      <span>POLA.WEB</span>
+    </a>
+    <nav aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#como-trabajo">Cómo trabajo</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-main" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">Escribime</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <svg class="blob" style="right:-120px;top:-60px;width:520px" viewBox="0 0 400 400" fill="#EBB4B0" opacity=".45" aria-hidden="true"><path d="M320 0 C250 60 330 140 260 210 C190 280 240 350 160 400 H400 V0 Z"/></svg>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker">Webs y sistemas a medida</p>
+        <h1>Tu negocio, <em>ordenado</em> y en internet.</h1>
+        <p class="lead">Diseño webs y sistemas de gestión para emprendimientos y negocios reales: turnos, reservas, clientes, pagos y pedidos, pensados para cómo trabajás vos.</p>
+        <div class="ctas">
+          <a class="btn btn-main" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/></svg>
+            Contame tu idea
+          </a>
+          <a class="btn btn-ghost" href="#proyectos">Ver proyectos reales</a>
+        </div>
+        <p class="note hand">la primera charla es sin costo ✿</p>
+      </div>
+      <div class="phone">
+        <div class="tape" aria-hidden="true"></div>
+        <div class="frame"><img src="img/quinta-panel.png" alt="Panel de Quinta La Unión en el celular: los avisos para enviar hoy por WhatsApp" width="390" height="844" loading="eager"></div>
+        <span class="hand" aria-hidden="true">un sistema real →</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="why" id="por-que">
+    <div class="wrap">
+      <p class="kicker">Por qué pola.web</p>
+      <h2>No es una plantilla: es tu negocio.</h2>
+      <div class="cards3">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5l5 5-10 10H4.5v-5z"/><path d="M12 7l5 5"/></svg></div>
+          <h3>Hecho a medida</h3>
+          <p>Cada proyecto lo pienso desde cero, según tu identidad y cómo trabajás. Nada de sistemas genéricos que te obligan a cambiar tu forma de hacer las cosas.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+          <h3>Pagás una vez y es tuyo</h3>
+          <p>Sin abonos obligatorios ni suscripciones que suben cada mes. Lo que hacemos queda para tu negocio. El mantenimiento es opcional.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 10.5c.3 1.8 2.2 3.6 4 4l1.2-1.1 1.8.8"/></svg></div>
+          <h3>Hablás conmigo</h3>
+          <p>Sin intermediarios ni tickets: me escribís por WhatsApp y te respondo yo, antes, durante y después del proyecto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Servicios</p>
+        <h2>Desde una web sencilla hasta un sistema completo.</h2>
+        <p class="lead">Cada presupuesto lo armo según lo que tu negocio necesita. Estos son los puntos de partida.</p>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <h3>Web</h3>
+          <p class="price">desde $180.000 <small>pago único</small></p>
+          <p>Tu negocio en internet, con tu identidad.</p>
+          <ul>
+            <li>Diseño a medida, pensado primero para el celular</li>
+            <li>Tus servicios, fotos y datos de contacto</li>
+            <li>Botón directo a tu WhatsApp</li>
+            <li>Tu propio dominio</li>
+          </ul>
+        </article>
+        <article class="plan star">
+          <span class="tag">El más pedido</span>
+          <h3>Web + gestión simple</h3>
+          <p class="price">desde $250.000 <small>pago único</small></p>
+          <p>Tu web más una herramienta para el día a día.</p>
+          <ul>
+            <li>Todo lo de la web</li>
+            <li>Turnos, reservas o pedidos online</li>
+            <li>Fichas de clientes</li>
+            <li>Panel para administrar desde el celular</li>
+          </ul>
+        </article>
+        <article class="plan">
+          <h3>Sistema completo</h3>
+          <p class="price">desde $350.000 <small>pago único</small></p>
+          <p>Para ordenar todo el negocio en un solo lugar.</p>
+          <ul>
+            <li>Pagos, señas y saldos</li>
+            <li>Comprobantes en PDF y mensajes por WhatsApp</li>
+            <li>Stock, producción, entregas o lo que tu rubro necesite</li>
+            <li>Usuarios y permisos para tu equipo</li>
+          </ul>
+        </article>
+      </div>
+      <div class="own">
+        <span class="hand" style="font-size:2rem">✓</span>
+        <p style="margin:0"><strong>Lo pagás una vez y es tuyo.</strong> Si después querés que me ocupe de cambios y actualizaciones, hay un mantenimiento mensual opcional.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects" id="proyectos">
+    <div class="wrap">
+      <p class="kicker">Proyectos reales</p>
+      <h2>Negocios muy distintos, la misma idea: que todo funcione.</h2>
+
+      <div class="proj">
+        <div class="shot tall">
+          <div class="tape" aria-hidden="true"></div>
+          <img src="img/quinta-calendario.png" alt="Calendario de reservas del panel de Quinta La Unión" width="390" height="844" loading="lazy">
+        </div>
+        <div>
+          <h3>Quinta La Unión · salón de eventos en Pilar</h3>
+          <p>Una web con la identidad del lugar, donde los clientes ven qué fechas están libres, y un sistema que la dueña usa desde el celular como si fuera una app: reservas, pagos, señas, saldos y comprobantes listos para mandar por WhatsApp.</p>
+          <ul class="chips"><li>Web con dominio propio</li><li>Disponibilidad online</li><li>Reservas</li><li>Pagos y saldos</li><li>Comprobantes PDF</li><li>Avisos en el celular</li></ul>
+          <p style="margin-top:18px"><a href="https://quintalaunion.com" target="_blank" rel="noopener">Ver quintalaunion.com →</a></p>
+          <p class="demo">Las capturas del panel usan datos de ejemplo para cuidar la privacidad de sus clientes.</p>
+        </div>
+      </div>
+
+      <div class="proj flip">
+        <div class="shot">
+          <div class="tape" aria-hidden="true"></div>
+          <img src="img/aluminio-pedido.png" alt="Detalle de un pedido en el sistema de Aluminio Más Perfiles, con productos, pagos y estado de entrega" width="2000" height="1250" loading="lazy">
+        </div>
+        <div>
+          <h3>Aluminio Más Perfiles · fábrica de aberturas</h3>
+          <p>Antes, todo iba en boletas de papel. Ahora cada pedido tiene su boleta digital con productos, señas y saldo, pasa por producción y se sigue hasta la entrega. Y la boleta se manda al cliente por WhatsApp.</p>
+          <ul class="chips"><li>Boletas digitales</li><li>Pedidos y entregas</li><li>Producción</li><li>Cobros</li><li>Envío por WhatsApp</li></ul>
+          <p class="demo">Las capturas usan datos de ejemplo para cuidar la privacidad de sus clientes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-trabajo">
+    <div class="wrap">
+      <p class="kicker">Cómo trabajo</p>
+      <h2>Simple, de principio a fin.</h2>
+      <div class="steps">
+        <div class="step"><h3>Charlamos</h3><p>Me contás qué hace tu negocio y qué te gustaría resolver. La primera charla es sin costo.</p></div>
+        <div class="step"><h3>Te propongo</h3><p>Te paso una propuesta con lo que necesitás de verdad y su presupuesto, sin sorpresas.</p></div>
+        <div class="step"><h3>Lo construyo</h3><p>Diseño y desarrollo tu web o sistema, y te muestro avances para que opines en el camino.</p></div>
+        <div class="step"><h3>Lo usás</h3><p>Te lo entrego funcionando, te enseño a usarlo y sigo disponible para lo que necesites.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="preguntas" style="padding-top:0">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Preguntas frecuentes</p>
+        <h2>Lo que más me preguntan.</h2>
+      </div>
+      <div class="faq">
+        <details><summary>¿Cuánto cuesta?</summary><p>Depende de lo que necesites: una web arranca desde $180.000, web + gestión simple desde $250.000 y un sistema completo desde $350.000. Es un pago único; después de la primera charla te paso el presupuesto exacto.</p></details>
+        <details><summary>¿Tengo que pagar todos los meses?</summary><p>No. Lo pagás una vez y es tuyo. Si querés que me ocupe de cambios y actualizaciones, hay un mantenimiento mensual opcional.</p></details>
+        <details><summary>¿Cuánto tarda?</summary><p>Depende del proyecto. En la propuesta te digo los tiempos para que sepas desde el principio cuándo lo vas a tener.</p></details>
+        <details><summary>No sé nada de tecnología, ¿lo voy a poder usar?</summary><p>Sí. Lo diseño para que sea simple de usar, incluso desde el celular, y te enseño paso a paso. Si algo no se entiende, se ajusta.</p></details>
+        <details><summary>¿Sirve para mi rubro?</summary><p>Trabajo con negocios muy distintos: salones, fábricas, estética, profesionales, comercios, servicios. Contame qué hacés y vemos qué te sirve.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="wrap">
+      <h2>¿Tenés una idea? Contámela.</h2>
+      <p class="lead">Aunque sea un borrador. Te respondo yo, por WhatsApp o por mensaje directo.</p>
+      <div class="ctas">
+        <a class="btn btn-main" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">WhatsApp 11 2852-4241</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/pola.web/" target="_blank" rel="noopener">Instagram @pola.web</a>
+      </div>
+      <span class="hand">te espero ✿</span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>pola.web · Webs y sistemas a medida · Pilar, Buenos Aires</span>
+    <span><a href="privacidad.html">Política de privacidad</a> · <a href="mailto:belensiracusa20@gmail.com">belensiracusa20@gmail.com</a></span>
+  </div>
+</footer>
+</body>
+</html>
