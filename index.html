@@ -39,7 +39,7 @@
   .btn:hover { transform: translateY(-2px); }
   .btn-main { background: var(--salmon); color: #fff; box-shadow: 0 12px 30px -12px rgba(255,111,111,.9); }
   .btn-main:hover { box-shadow: 0 18px 36px -12px rgba(255,111,111,1); }
-  .btn-glass { background: var(--glass); color: var(--cream); border: 1px solid var(--glass-line); backdrop-filter: blur(8px); }
+  .btn-glass { background: var(--glass); color: var(--cream); border: 1px solid var(--glass-line); }
   .btn svg { width: 18px; height: 18px; }
 
   header { position: fixed; inset: 0 0 auto; z-index: 20; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
@@ -58,9 +58,9 @@
   .hero::before { content: ""; position: absolute; inset: 0; z-index: -2;
     background-image: linear-gradient(var(--glass-line) 1px, transparent 1px), linear-gradient(90deg, var(--glass-line) 1px, transparent 1px);
     background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 30%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 30%, transparent 75%); opacity: .45; }
-  .glow { position: absolute; z-index: -1; border-radius: 50%; filter: blur(80px); }
-  .glow.a { width: 520px; height: 520px; background: rgba(255,111,111,.38); right: -120px; top: -80px; animation: drift 14s ease-in-out infinite alternate; }
-  .glow.b { width: 420px; height: 420px; background: rgba(235,180,176,.18); left: -160px; bottom: -160px; }
+  .glow { position: absolute; z-index: -1; border-radius: 50%; }
+  .glow.a { width: 520px; height: 520px; background: radial-gradient(circle, rgba(255,111,111,.42), transparent 68%); right: -160px; top: -140px; }
+  .glow.b { width: 420px; height: 420px; background: radial-gradient(circle, rgba(235,180,176,.2), transparent 68%); left: -180px; bottom: -200px; }
   @keyframes drift { to { transform: translate(-60px, 50px) scale(1.08); } }
   .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
   .hero h1 { font-size: clamp(2.7rem, 6.4vw, 5rem); color: var(--cream); margin: 22px 0 0; }
@@ -70,21 +70,24 @@
   .hero .hand { display: block; margin-top: 26px; color: var(--powder); }
 
   .stage { position: relative; height: 520px; }
-  .phone { position: absolute; right: 8%; top: 0; width: 250px; border-radius: 36px; padding: 9px; background: #061c22; box-shadow: 0 40px 80px -30px rgba(0,0,0,.7), 0 0 0 1px var(--glass-line); transform: rotate(3deg); }
-  .phone img { border-radius: 28px; }
+  .phone { position: absolute; right: 0; top: 0; width: 280px; border-radius: 44px; padding: 7px; background: linear-gradient(145deg, #2a4b55, #071a20 40%, #0d2a33); box-shadow: 0 50px 90px -35px rgba(0,0,0,.75), 0 0 0 1px rgba(255,244,233,.18), inset 0 0 0 1px rgba(255,255,255,.06); }
+  .phone::before { content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 76px; height: 22px; border-radius: 999px; background: #050f12; z-index: 2; }
+  .phone::after { content: ""; position: absolute; inset: 7px; border-radius: 37px; background: linear-gradient(120deg, rgba(255,255,255,.14), transparent 30%); pointer-events: none; z-index: 1; }
+  .phone img { border-radius: 37px; width: 100%; padding-top: 0; }
+  .screen { border-radius: 37px; overflow: hidden; background: #fff; padding-top: 44px; }
   .chip { position: absolute; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 16px; background: #123f4c; border: 1px solid rgba(255,244,233,.18); color: var(--cream); font-size: .9rem; line-height: 1.35; box-shadow: 0 24px 48px -18px rgba(0,0,0,.75); white-space: nowrap; animation: float 6s ease-in-out infinite; z-index: 2; }
   .chip b { font-weight: 700; }
   .chip .dot { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; background: var(--salmon); flex: none; }
   .chip .dot svg { width: 16px; height: 16px; }
-  .chip.one { left: 0; top: 60px; }
-  .chip.two { left: -4%; top: 220px; animation-delay: -2s; }
-  .chip.three { left: 6%; top: 380px; animation-delay: -4s; }
+  .chip.one { left: -6%; top: 70px; }
+  .chip.two { left: -12%; top: 230px; animation-delay: -2s; }
+  .chip.three { left: -2%; top: 390px; animation-delay: -4s; }
   @keyframes float { 50% { transform: translateY(-8px); } }
   @media (max-width: 900px) {
     .hero { padding-top: 120px; }
     .hero-grid { grid-template-columns: 1fr; }
     .stage { height: 470px; max-width: 380px; margin: 0 auto; width: 100%; }
-    .stage .phone { right: 50%; transform: translateX(50%) rotate(3deg); width: 220px; }
+    .stage .phone { right: 50%; transform: translateX(50%); width: 240px; }
     .chip { font-size: .8rem; padding: 10px 12px; }
     .chip.one { left: 0; top: 40px; } .chip.two { left: 0; top: 230px; } .chip.three { right: 0; bottom: 10px; }
   }
@@ -105,7 +108,7 @@
   .tier ul { list-style: none; padding: 0; margin: 4px 0 18px; display: grid; gap: 8px; color: var(--muted); font-size: .95rem; }
   .tier li::before { content: "→ "; color: var(--salmon); }
   .tier.star { background: var(--ink); color: var(--mist); border-color: transparent; overflow: hidden; }
-  .tier.star::after { content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,111,111,.35); filter: blur(60px); right: -80px; top: -80px; pointer-events: none; }
+  .tier.star::after { content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(255,111,111,.4), transparent 68%); right: -80px; top: -80px; pointer-events: none; }
   .tier.star h3, .tier.star .price { color: var(--cream); }
   .tier.star ul, .tier.star .num, .tier.star .price small { color: var(--mist); }
   .tier .tag { position: absolute; top: 26px; right: 26px; font: 500 .7rem "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; background: var(--salmon); color: #fff; padding: 5px 10px; border-radius: 999px; z-index: 1; }
@@ -118,7 +121,7 @@
   .work h2 { color: var(--cream); }
   .work .head p { color: var(--mist); }
   .case { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding: 40px; border-radius: 32px; background: var(--glass); border: 1px solid var(--glass-line); margin-top: 18px; }
-  .case.rev { grid-template-columns: 1.15fr .85fr; }
+  .case.rev { grid-template-columns: 1.45fr .55fr; gap: 36px; }
   .case h3 { color: var(--cream); font-size: 1.7rem; }
   .case p { margin: 12px 0 18px; }
   .case .meta { font: 500 .74rem "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--salmon-2); }
@@ -130,9 +133,9 @@
   .browser .bar i { width: 10px; height: 10px; border-radius: 50%; background: #d3d9de; }
   .browser img { width: 100%; height: auto; }
   .duo { display: flex; justify-content: center; }
-  .duo .phone { position: relative; right: auto; top: auto; width: 230px; transform: rotate(-2deg); }
-  .duo .phone img { height: 400px; width: 100%; object-fit: cover; object-position: top; }
-  @media (max-width: 900px) { .case, .case.rev { grid-template-columns: 1fr; padding: 24px; gap: 28px; } .case.rev .browser { order: -1; } .duo .phone { width: 210px; } }
+  .duo .phone { position: relative; right: auto; top: auto; width: 270px; }
+  .duo .phone img { height: 470px; object-fit: cover; object-position: top; }
+  @media (max-width: 900px) { .case, .case.rev { grid-template-columns: 1fr; padding: 24px; gap: 28px; } .case.rev .browser { order: -1; } .duo .phone { width: 240px; } .duo .phone img { height: 420px; } }
 
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .step { border-top: 2px solid var(--ink); padding-top: 20px; }
@@ -153,7 +156,7 @@
 
   .cta { padding: 0 0 104px; }
   .cta .box { position: relative; overflow: hidden; border-radius: 36px; background: var(--ink); color: var(--cream); padding: 72px 24px; text-align: center; isolation: isolate; }
-  .cta .box::before { content: ""; position: absolute; z-index: -1; width: 600px; height: 600px; border-radius: 50%; background: rgba(255,111,111,.4); filter: blur(100px); left: 50%; top: 40%; transform: translateX(-50%); }
+  .cta .box::before { content: ""; position: absolute; z-index: -1; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(255,111,111,.45), transparent 66%); left: 50%; top: 40%; transform: translateX(-50%); }
   .cta h2 { color: var(--cream); }
   .cta p { color: var(--mist); margin: 16px auto 32px; max-width: 44ch; }
   .cta .ctas { justify-content: center; }
@@ -204,7 +207,7 @@
         <span class="hand">la primera charla es sin costo ✿</span>
       </div>
       <div class="stage" aria-hidden="true">
-        <div class="phone"><img src="img/quinta-panel.png" alt="" width="390" height="844"></div>
+        <div class="phone"><div class="screen"><img src="img/quinta-panel.png" alt="" width="390" height="844"></div></div>
         <div class="chip one"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg></span><span><b>Reserva confirmada</b><br>Sábado 17 · 120 invitados</span></div>
         <div class="chip two"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg></span><span><b>Comprobante enviado</b> ✓✓<br>por WhatsApp</span></div>
         <div class="chip three"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg></span><span><b>Saldo al día</b><br>señas y pagos en orden</span></div>
@@ -264,7 +267,7 @@
           <a class="more" href="https://quintalaunion.com" target="_blank" rel="noopener">Ver quintalaunion.com ↗</a>
         </div>
         <div class="duo">
-          <div class="phone"><img src="img/quinta-calendario.png" alt="Calendario de reservas del panel de Quinta La Unión" width="390" height="844" loading="lazy"></div>
+          <div class="phone"><div class="screen"><img src="img/quinta-calendario.png" alt="Calendario de reservas del panel de Quinta La Unión" width="390" height="844" loading="lazy"></div></div>
         </div>
       </article>
 
@@ -290,7 +293,7 @@
           <ul class="pills"><li>Facturación</li><li>Cobros</li><li>Comisiones</li><li>Reparto</li></ul>
         </div>
         <div class="duo">
-          <div class="phone"><img src="img/liga-cobros.png" alt="Pantalla de cobros del sistema de La Liga, con datos de ejemplo" width="975" height="2110" loading="lazy"></div>
+          <div class="phone"><div class="screen"><img src="img/liga-cobros.png" alt="Pantalla de cobros del sistema de La Liga, con datos de ejemplo" width="975" height="2110" loading="lazy"></div></div>
         </div>
       </article>
     </div>
