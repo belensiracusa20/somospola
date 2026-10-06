@@ -62,8 +62,8 @@
   .glow.a { width: 520px; height: 520px; background: radial-gradient(circle, rgba(255,111,111,.42), transparent 68%); right: -160px; top: -140px; }
   .glow.b { width: 420px; height: 420px; background: radial-gradient(circle, rgba(235,180,176,.2), transparent 68%); left: -180px; bottom: -200px; }
   @keyframes drift { to { transform: translate(-60px, 50px) scale(1.08); } }
-  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
-  .hero h1 { font-size: clamp(2.7rem, 6.4vw, 5rem); color: var(--cream); margin: 22px 0 0; }
+  .hero-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; align-items: center; }
+  .hero h1 { font-size: clamp(2.6rem, 5.4vw, 4.3rem); color: var(--cream); margin: 22px 0 0; }
   .hero h1 em.serif { color: var(--salmon-2); }
   .hero p.sub { font-size: 1.18rem; color: var(--mist); max-width: 40ch; margin: 22px 0 34px; }
   .ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
@@ -102,7 +102,7 @@
   .work { background: var(--ink); color: var(--mist); position: relative; overflow: hidden; }
   .work h2 { color: var(--cream); }
   .work .head p { color: var(--mist); }
-  .case { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding: 40px; border-radius: 32px; background: var(--glass); border: 1px solid var(--glass-line); margin-top: 18px; }
+  .case { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; align-items: center; padding: 40px; border-radius: 32px; background: var(--glass); border: 1px solid var(--glass-line); margin-top: 18px; }
   .case.rev { grid-template-columns: 1.2fr .8fr; gap: 40px; }
   .case h3 { color: var(--cream); font-size: 1.7rem; }
   .case p { margin: 12px 0 18px; }
@@ -123,15 +123,16 @@
   .combo .browser { border-radius: 14px; }
   .browser .bar { align-items: center; }
   .browser .bar span { margin-left: 10px; font: 500 .72rem "JetBrains Mono", monospace; color: #6b7a82; letter-spacing: .02em; }
-  .app { position: absolute; left: 0; bottom: 0; width: 25%; border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid rgba(255,244,233,.25); box-shadow: 0 30px 60px -24px rgba(0,0,0,.7); }
+  .app { position: absolute; left: 0; bottom: 0; width: 28%; border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid rgba(255,244,233,.25); box-shadow: 0 30px 60px -24px rgba(0,0,0,.7); }
   .app img { width: 100%; height: auto; aspect-ratio: 9 / 14; object-fit: cover; object-position: top; }
-  .hero-combo { width: 100%; }
+  .hero-combo { width: calc(100% + 120px); margin-right: -120px; }
+  .hero-combo .app { width: 30%; }
   .combo.wide .sys { position: absolute; right: -24px; bottom: 0; width: 62%; box-shadow: 0 30px 60px -24px rgba(0,0,0,.8); }
   .combo.wide { padding: 0 24px 120px 0; }
   .solo { display: flex; justify-content: center; }
   .solo .app { position: relative; width: 280px; }
   .solo .app img { aspect-ratio: 9 / 15; }
-  @media (max-width: 900px) { .combo { padding: 0 0 40px 28px; } .app { width: 34%; border-radius: 14px; } .combo.wide { padding: 0 0 90px 0; } .combo.wide .sys { right: 0; } .solo .app { width: 230px; } }
+  @media (max-width: 900px) { .hero-combo { width: 100%; margin-right: 0; } .hero-combo .app { width: 34%; } .combo { padding: 0 0 40px 28px; } .app { width: 34%; border-radius: 14px; } .combo.wide { padding: 0 0 90px 0; } .combo.wide .sys { right: 0; } .solo .app { width: 230px; } }
 
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .step { border-top: 2px solid var(--ink); padding-top: 20px; }
