@@ -72,13 +72,13 @@
   .stage { position: relative; height: 520px; }
   .phone { position: absolute; right: 8%; top: 0; width: 250px; border-radius: 36px; padding: 9px; background: #061c22; box-shadow: 0 40px 80px -30px rgba(0,0,0,.7), 0 0 0 1px var(--glass-line); transform: rotate(3deg); }
   .phone img { border-radius: 28px; }
-  .chip { position: absolute; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 16px; background: rgba(255,250,244,.1); border: 1px solid var(--glass-line); backdrop-filter: blur(14px); color: var(--cream); font-size: .9rem; line-height: 1.35; box-shadow: 0 20px 40px -20px rgba(0,0,0,.6); white-space: nowrap; animation: float 6s ease-in-out infinite; }
+  .chip { position: absolute; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 16px; background: #123f4c; border: 1px solid rgba(255,244,233,.18); color: var(--cream); font-size: .9rem; line-height: 1.35; box-shadow: 0 24px 48px -18px rgba(0,0,0,.75); white-space: nowrap; animation: float 6s ease-in-out infinite; z-index: 2; }
   .chip b { font-weight: 700; }
   .chip .dot { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; background: var(--salmon); flex: none; }
   .chip .dot svg { width: 16px; height: 16px; }
-  .chip.one { left: 0; top: 70px; }
-  .chip.two { left: 4%; top: 250px; animation-delay: -2s; }
-  .chip.three { right: 0; bottom: 30px; animation-delay: -4s; }
+  .chip.one { left: 0; top: 60px; }
+  .chip.two { left: -4%; top: 220px; animation-delay: -2s; }
+  .chip.three { left: 6%; top: 380px; animation-delay: -4s; }
   @keyframes float { 50% { transform: translateY(-8px); } }
   @media (max-width: 900px) {
     .hero { padding-top: 120px; }
@@ -207,7 +207,7 @@
         <div class="phone"><img src="img/quinta-panel.png" alt="" width="390" height="844"></div>
         <div class="chip one"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg></span><span><b>Reserva confirmada</b><br>Sábado 17 · 120 invitados</span></div>
         <div class="chip two"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg></span><span><b>Comprobante enviado</b> ✓✓<br>por WhatsApp</span></div>
-        <div class="chip three"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg></span><span><b>Saldo pendiente</b><br>$ 150.000</span></div>
+        <div class="chip three"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg></span><span><b>Saldo al día</b><br>señas y pagos en orden</span></div>
       </div>
     </div>
   </section>
