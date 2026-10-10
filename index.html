@@ -6,307 +6,426 @@
 <title>pola.web · Webs y sistemas a medida</title>
 <meta name="description" content="Webs y sistemas a medida para negocios: reservas, turnos, pagos, comprobantes y avisos por WhatsApp. Pagás una vez y es tuyo.">
 <meta property="og:title" content="pola.web · Webs y sistemas a medida">
-<meta property="og:description" content="Tu negocio, ordenado y en internet. Pagás una vez y es tuyo.">
+<meta property="og:description" content="Turnos, pedidos, pagos y clientes en un solo sistema. Pagás una vez y es tuyo.">
 <meta property="og:image" content="https://somospola.com/img/pola-logo.png">
 <meta property="og:url" content="https://somospola.com/">
-<meta name="theme-color" content="#0B2F39">
+<meta name="theme-color" content="#121314">
 <link rel="icon" href="img/pola-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=Fraunces:ital,opsz,wght@1,9..144,500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0B2F39; --ink-2: #0E3A46;
-    --salmon: #FF6F6F; --salmon-2: #ff8f80; --cream: #FFF4E9; --paper: #FFFAF4; --powder: #EBB4B0; --choco: #3A2A23;
-    --mist: rgba(255,244,233,.72); --glass: rgba(255,255,255,.06); --glass-line: rgba(255,244,233,.14);
-    --muted: #6b5a51; --line: #ecdccc;
+    --cream: #FBF3EA; --cream-2: #F4E7D8; --ink: #15191B; --ink-2: #5E5650; --line: #E6D7C6;
+    --salmon: #FF6F6F; --salmon-ink: #D9484B; --petrol: #0E3A46; --petrol-2: #124855; --powder: #F2C9C3; --mint: #CFE6DD;
+    --ease-out: cubic-bezier(.23, 1, .32, 1);
+    --display: Archivo, "Arial Black", sans-serif; --text: "General Sans", system-ui, sans-serif;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--paper); color: var(--choco); font: 17px/1.6 "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  img { max-width: 100%; display: block; }
-  a { color: inherit; }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
-  h1, h2, h3 { margin: 0; letter-spacing: -.03em; line-height: 1.04; font-weight: 800; }
-  h2 { font-size: clamp(2rem, 4.6vw, 3.3rem); color: var(--ink); }
-  h3 { font-size: 1.3rem; letter-spacing: -.02em; }
-  em.serif { font-family: Fraunces, Georgia, serif; font-style: italic; font-weight: 500; letter-spacing: -.02em; }
-  .label { font: 500 .74rem/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--salmon); display: inline-flex; align-items: center; gap: 8px; }
-  .label::before { content: ""; width: 18px; height: 1px; background: currentColor; }
-  .hand { font-family: Caveat, cursive; color: var(--salmon); font-size: 1.5rem; line-height: 1; }
-  section { padding: 104px 0; }
-  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 24px; border-radius: 999px; font-weight: 700; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease, background .2s; }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-main { background: var(--salmon); color: #fff; box-shadow: 0 12px 30px -12px rgba(255,111,111,.9); }
-  .btn-main:hover { box-shadow: 0 18px 36px -12px rgba(255,111,111,1); }
-  .btn-glass { background: var(--glass); color: var(--cream); border: 1px solid var(--glass-line); }
-  .btn svg { width: 18px; height: 18px; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font: 18px/1.55 var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, p { margin: 0; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; font-stretch: 100%; letter-spacing: -.03em; line-height: 1.02; text-wrap: balance; }
+  h2 { font-size: clamp(2rem, 3.7vw, 3.25rem); }
+  h3 { font-weight: 700; letter-spacing: -.02em; }
+  /* notas al margen con la letra de Belén: pocas, siempre con algo que decir */
+  .hand { font-family: Caveat, cursive; font-weight: 700; font-size: 1.55rem; line-height: 1.05; color: var(--salmon-ink); display: inline-block; transform: rotate(-2deg); }
+  .kicker { display: block; font-weight: 600; font-size: .95rem; color: var(--salmon-ink); margin-bottom: 14px; }
+  p { text-wrap: pretty; }
+  :focus-visible { outline: 2px solid var(--salmon); outline-offset: 3px; border-radius: 8px; }
+  .skip { position: absolute; left: 16px; top: -60px; z-index: 60; background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 10px; font-weight: 600; transition: top .2s var(--ease-out); }
+  .skip:focus { top: 12px; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 112px 0 120px; }
+  .eyebrow { font-weight: 500; color: var(--ink-2); font-size: 1rem; }
 
-  header { position: fixed; inset: 0 0 auto; z-index: 20; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
-  header.scrolled { background: rgba(11,47,57,.82); backdrop-filter: blur(12px); border-color: var(--glass-line); }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--cream); }
-  .brand svg { height: 28px; width: auto; }
-  .brand span { letter-spacing: .32em; font-size: .8rem; font-weight: 500; }
-  .nav nav { display: flex; gap: 28px; font-size: .93rem; }
-  .nav nav a { color: var(--mist); text-decoration: none; }
-  .nav nav a:hover { color: #fff; }
-  .nav .btn { padding: 10px 18px; font-size: .9rem; }
-  @media (max-width: 820px) { .nav nav { display: none; } }
+  .pill { display: inline-flex; align-items: center; gap: 9px; height: 52px; padding: 0 26px; border-radius: 999px; font-weight: 600; font-size: 1rem; transition: transform .16s var(--ease-out), background-color .2s var(--ease-out); }
+  .pill:active { transform: scale(.97); }
+  .pill svg { width: 18px; height: 18px; }
+  .pill.dark { background: var(--ink); color: #fff; }
+  .pill.salmon { background: var(--salmon); color: #fff; }
+  .pill.line { box-shadow: inset 0 0 0 1.5px currentColor; }
+  .pill.small { height: 42px; padding: 0 18px; font-size: .94rem; }
+  @media (hover: hover) and (pointer: fine) {
+    .pill.dark:hover { background: #2b3134; } .pill.salmon:hover { background: #ff5c5c; } .pill.line:hover { background: rgba(21,25,27,.06); }
+  }
+  .link { font-weight: 600; border-bottom: 2px solid var(--salmon); padding-bottom: 2px; }
 
-  .hero { position: relative; overflow: hidden; background: var(--ink); color: var(--cream); padding: 150px 0 110px; isolation: isolate; }
-  .hero::before { content: ""; position: absolute; inset: 0; z-index: -2;
-    background-image: linear-gradient(var(--glass-line) 1px, transparent 1px), linear-gradient(90deg, var(--glass-line) 1px, transparent 1px);
-    background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 30%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 30%, transparent 75%); opacity: .45; }
-  .glow { position: absolute; z-index: -1; border-radius: 50%; }
-  .glow.a { width: 520px; height: 520px; background: radial-gradient(circle, rgba(255,111,111,.42), transparent 68%); right: -160px; top: -140px; }
-  .glow.b { width: 420px; height: 420px; background: radial-gradient(circle, rgba(235,180,176,.2), transparent 68%); left: -180px; bottom: -200px; }
-  @keyframes drift { to { transform: translate(-60px, 50px) scale(1.08); } }
-  .hero-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; align-items: center; }
-  .hero h1 { font-size: clamp(2.6rem, 5.4vw, 4.3rem); color: var(--cream); margin: 22px 0 0; }
-  .hero h1 em.serif { color: var(--salmon-2); }
-  .hero p.sub { font-size: 1.18rem; color: var(--mist); max-width: 40ch; margin: 22px 0 34px; }
-  .ctas { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .hero .hand { display: block; margin-top: 26px; color: var(--powder); }
+  /* barra */
+  header { position: fixed; top: 14px; left: 0; right: 0; z-index: 40; pointer-events: none; }
+  header .wrap.bar { pointer-events: auto; max-width: 1200px; width: calc(100% - 28px); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 62px; padding: 0 8px 0 22px; border-radius: 999px; background: rgba(17,17,17,.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset, 0 12px 30px -14px rgba(0,0,0,.55); color: #fff; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.12rem; letter-spacing: -.01em; }
+  .logo svg { height: 26px; width: auto; }
+  header nav { display: flex; gap: 30px; color: rgba(255,255,255,.68); font-size: .96rem; }
+  header nav a { transition: color .15s var(--ease-out); }
+  @media (hover: hover) { header nav a:hover { color: #fff; } }
+  @media (max-width: 800px) { header nav { display: none; } }
 
-  @media (max-width: 900px) {
-    .hero { padding-top: 120px; }
-    .hero-grid { grid-template-columns: 1fr; }
+  /* ── portada: titular gigante + Belén protagonista ── */
+  .hero { padding: 150px 0 0; position: relative; overflow: hidden; background: #121314; color: #F3EDE4; isolation: isolate; }
+  .hero .eyebrow, .hero .sub, .hero .note { color: rgba(243,237,228,.68); }
+  .hero .link { color: #fff; }
+  .hero .pill.dark { background: var(--salmon); }
+  @media (hover: hover) and (pointer: fine) { .hero .pill.dark:hover { background: #ff5c5c; } }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); align-items: end; gap: 72px; }
+  .hero-grid > div:first-child { position: relative; z-index: 2; min-width: 0; }
+  .hero h1 { font-size: clamp(2.7rem, 5.9vw, 6.4rem); font-weight: 900; font-stretch: 125%; line-height: .9; letter-spacing: -.05em; }
+  .hero h1 .rot { display: block; position: relative; height: 1.14em; margin-bottom: -.2em; overflow: hidden; color: var(--salmon); }
+  .hero h1 .rot span { position: absolute; left: 0; top: 0; white-space: nowrap; opacity: 0; transform: translateY(100%); transition: transform .55s var(--ease-out), opacity .35s var(--ease-out); }
+  .hero h1 .rot span.on { opacity: 1; transform: none; }
+  .hero h1 .rot span.off { opacity: 0; transform: translateY(-100%); }
+  .hero .sub { margin-top: 28px; max-width: 42ch; font-size: 1.18rem; line-height: 1.6; color: rgba(243,237,228,.74); }
+  .hero .ctas { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 30px; }
+  .hero .note { margin-top: 18px; font-size: .95rem; color: rgba(243,237,228,.6); }
+  .art { position: relative; align-self: end; }
+  .art .hello { position: absolute; left: -38%; top: 3%; z-index: 2; color: var(--powder); white-space: nowrap; }
+  .art .hello svg { display: block; width: 64px; margin: 4px 0 0 118px; }
+  .art .belen { width: 100%; max-width: 380px; margin: 0 auto; filter: drop-shadow(0 26px 30px rgba(21,25,27,.16)); }
+  .float { position: absolute; color: var(--ink); background: #fff; border-radius: 18px; padding: 12px 15px; font-size: .9rem; line-height: 1.3; box-shadow: 0 22px 40px -20px rgba(21,25,27,.38); }
+  .float b { display: block; font-size: 1.06rem; font-weight: 600; letter-spacing: -.01em; }
+  .float .ok { color: #1E8E5A; font-weight: 600; }
+  .float .tag { display: inline-block; margin-top: 5px; background: #FFE4DF; color: var(--salmon-ink); font-weight: 600; border-radius: 6px; padding: 2px 8px; font-size: .82rem; }
+  .float.b { right: -6%; top: 58%; } .float.c { left: -2%; bottom: 9%; }
+  .strip { margin-top: 70px; border-top: 1px solid rgba(255,255,255,.1); }
+  .strip .wrap { display: flex; flex-wrap: wrap; gap: 10px 44px; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; font-size: 1rem; color: rgba(243,237,228,.55); }
+  .strip b { font-family: var(--display); font-weight: 800; font-stretch: 112%; font-size: 1.25rem; color: #F3EDE4; letter-spacing: -.02em; }
+  @media (max-width: 1080px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 10px; }
+    .art { width: min(78%, 330px); margin: 34px auto 0; }
+    .float.b { right: -8%; } .float.c { left: -6%; } .art .hello { left: auto; right: 72%; top: -2%; font-size: 1.25rem; } .art .hello svg { width: 40px; margin-left: 70px; } .float { font-size: .8rem; padding: 9px 11px; } .float b { font-size: .92rem; }
+    .strip .wrap { justify-content: center; }
   }
 
-  .proof { background: var(--ink-2); color: var(--mist); border-top: 1px solid var(--glass-line); padding: 22px 0; font-size: .92rem; }
-  .proof .wrap { display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: center; justify-content: center; }
-  .proof strong { color: var(--cream); font-weight: 500; }
+  /* ── el problema ── */
+  .pains-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; }
+  .pains-head p { color: var(--ink-2); font-size: 1.15rem; max-width: 40ch; }
+  .pain-list { list-style: none; margin: 60px 0 0; padding: 0; border-top: 1px solid var(--ink); }
+  .pain { display: grid; grid-template-columns: 90px 1fr 1fr; gap: 30px; padding: 30px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .pain .n { font-family: var(--display); font-weight: 900; font-size: 2.2rem; color: var(--salmon-ink); line-height: 1; }
+  .pain .q { font-family: var(--display); font-weight: 700; font-stretch: 105%; font-size: clamp(1.45rem, 2.4vw, 2rem); line-height: 1.08; letter-spacing: -.025em; }
+  .pain .a { color: var(--ink-2); font-size: 1.08rem; }
+  .pain .a strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 860px) { .pains-head { grid-template-columns: 1fr; } .pain { grid-template-columns: 1fr; gap: 10px; } }
 
-  .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 44px; }
-  .head p { max-width: 38ch; color: var(--muted); margin: 0; }
-  .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .tier { position: relative; border-radius: 28px; padding: 30px; background: #fff; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; min-height: 340px; transition: transform .25s, box-shadow .25s; }
-  .tier:hover { transform: translateY(-4px); box-shadow: 0 24px 48px -28px rgba(58,42,35,.35); }
-  .tier .num { font: 500 .78rem "JetBrains Mono", monospace; color: var(--muted); }
-  .tier h3 { color: var(--ink); }
-  .tier .price { font-size: 2.3rem; font-weight: 800; letter-spacing: -.03em; color: var(--ink); margin: auto 0 0; line-height: 1.1; }
-  .tier .price small { display: block; font-size: .8rem; font-weight: 500; letter-spacing: 0; color: var(--muted); margin-top: 4px; }
-  .tier ul { list-style: none; padding: 0; margin: 4px 0 18px; display: grid; gap: 8px; color: var(--muted); font-size: .95rem; }
-  .tier li::before { content: "→ "; color: var(--salmon); }
-  .tier.star { background: var(--ink); color: var(--mist); border-color: transparent; overflow: hidden; }
-  .tier.star::after { content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(255,111,111,.4), transparent 68%); right: -80px; top: -80px; pointer-events: none; }
-  .tier.star h3, .tier.star .price { color: var(--cream); }
-  .tier.star ul, .tier.star .num, .tier.star .price small { color: var(--mist); }
-  .tier .tag { position: absolute; top: 26px; right: 26px; font: 500 .7rem "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; background: var(--salmon); color: #fff; padding: 5px 10px; border-radius: 999px; z-index: 1; }
-  .own { margin-top: 16px; border-radius: 28px; padding: 22px 28px; background: var(--cream); display: flex; justify-content: space-between; gap: 16px; align-items: center; flex-wrap: wrap; }
-  .own p { margin: 0; color: var(--ink); font-weight: 500; }
-  .own p span { color: var(--muted); font-weight: 400; }
-  @media (max-width: 900px) { .bento { grid-template-columns: 1fr; } .tier { min-height: 0; } }
+  /* ── historia con scroll: de los papelitos al sistema ── */
+  .story { padding: 0; background: var(--cream); }
+  .story-pin { min-height: 100dvh; display: flex; align-items: center; padding: 110px 0 60px; }
+  .story-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; width: 100%; }
+  .story-copy { position: relative; min-height: 3.6em; font-size: clamp(2rem, 4.2vw, 3.8rem); }
+  .story-copy .st { position: absolute; inset: 0 0 auto 0; font-size: 1em; opacity: 0; visibility: hidden; }
+  .story-copy .st1 { opacity: 1; visibility: visible; }
+  .story-copy .hl { color: var(--salmon-ink); }
+  .stage { position: relative; height: min(64vh, 560px); perspective: 1300px; transform-style: preserve-3d; }
+  .note { position: absolute; left: var(--x); top: var(--y); transform: rotate(var(--r)); background: #FFF7B8; color: #3b3320; font: 600 clamp(1.05rem, 1.6vw, 1.45rem)/1.1 Caveat, cursive; padding: 14px 16px 16px; border-radius: 3px; box-shadow: 0 10px 18px -10px rgba(60,40,10,.45); max-width: 210px; will-change: transform; }
+  .note.y { background: #FFE0D6; } .note.p { background: #DFF1EA; }
+  .device { position: absolute; left: 50%; top: 50%; width: min(440px, 92%); transform: translate(-50%, -50%); transform-style: preserve-3d; opacity: 0; background: #fff; border-radius: 22px; padding: 18px; box-shadow: 0 0 0 10px #151515, 0 40px 70px -30px rgba(0,0,0,.55); }
+  .device::after { content: ""; position: absolute; left: 4%; right: 4%; bottom: -26px; height: 16px; border-radius: 0 0 18px 18px; background: linear-gradient(#2a2a2a, #0d0d0d); transform: rotateX(-60deg); transform-origin: top; }
+  .d-top { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: .95rem; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .d-top svg { height: 18px; width: auto; }
+  .d-search { margin: 14px 0 10px; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; min-height: 46px; }
+  .d-search i { width: 2px; height: 20px; background: var(--ink); animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 10px; border-radius: 12px; opacity: 0; transform: translateY(10px); }
+  .row b { display: block; font-weight: 600; } .row span { color: var(--ink-2); font-size: .9rem; }
+  .row em { font-style: normal; font-weight: 600; font-size: .86rem; padding: 4px 9px; border-radius: 7px; white-space: nowrap; }
+  .t-salmon { background: #FFE4DF; color: var(--salmon-ink); } .t-ok { background: #DDF2E6; color: #1E7A4C; }
+  .row.r1.found { background: #FFF3EF; box-shadow: inset 0 0 0 1.5px var(--salmon), 0 18px 30px -16px rgba(217,72,75,.45); }
+  .d-note { margin-top: 8px; font-size: .78rem; color: var(--ink-2); text-align: right; }
+  .story.static .st { position: static; opacity: 1; visibility: visible; margin-bottom: 18px; } .story.static .st1 { display: none; }
+  .story.static .note { display: none; } .story.static .device { opacity: 1; transform: translate(-50%, -50%); } .story.static .row { opacity: 1; transform: none; }
+  @media (max-width: 900px) {
+    .story-pin { padding: 96px 0 30px; align-items: flex-start; }
+    .story-grid { grid-template-columns: 1fr; gap: 18px; }
+    .story-copy { font-size: clamp(1.7rem, 7.4vw, 2.4rem); min-height: 4.2em; }
+    .stage { height: 54vh; }
+    .note { max-width: 150px; padding: 10px 12px 12px; }
+  }
 
-  .work { background: var(--ink); color: var(--mist); position: relative; overflow: hidden; }
-  .work h2 { color: var(--cream); }
-  .work .head p { color: var(--mist); }
-  .case { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; align-items: center; padding: 40px; border-radius: 32px; background: var(--glass); border: 1px solid var(--glass-line); margin-top: 18px; }
-  .case.rev { grid-template-columns: 1.2fr .8fr; gap: 40px; }
-  .case h3 { color: var(--cream); font-size: 1.7rem; }
-  .case p { margin: 12px 0 18px; }
-  .case .meta { font: 500 .74rem "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--salmon-2); }
-  .pills { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 18px; }
-  .pills li { border: 1px solid var(--glass-line); border-radius: 999px; padding: 5px 12px; font-size: .84rem; color: var(--cream); }
-  .case a.more { color: var(--cream); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--salmon); }
-  .browser { border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 40px 80px -40px rgba(0,0,0,.8); }
-  .browser .bar { display: flex; gap: 6px; padding: 10px 12px; background: #eef1f3; }
-  .browser .bar i { width: 10px; height: 10px; border-radius: 50%; background: #d3d9de; }
-  .browser img { width: 100%; height: auto; }
-  @media (max-width: 900px) { .case, .case.rev { grid-template-columns: 1fr; padding: 24px; gap: 28px; } .case.rev .browser { order: -1; } }
+  /* ── proyectos ── */
+  .work { background: var(--petrol); color: #EAF1F0; border-radius: 40px 40px 0 0; }
+  .work h2 { color: #fff; }
+  .work .lead { color: #B9CDCC; max-width: 46ch; margin-top: 20px; font-size: 1.12rem; }
+  .case { display: grid; grid-template-columns: 1fr 1.25fr; gap: 56px; align-items: center; margin-top: 90px; }
+  .case.flip { grid-template-columns: 1.25fr 1fr; }
+  .case.flip .shot { order: -1; }
+  .case .kind { color: var(--powder); font-weight: 500; }
+  .case h3 { font-size: clamp(1.8rem, 2.8vw, 2.5rem); color: #fff; margin-top: 8px; }
+  .case p { color: #C6D6D5; margin-top: 16px; max-width: 44ch; }
+  .case .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 26px; padding: 0; list-style: none; }
+  .case .tags li { background: rgba(255,255,255,.08); border-radius: 8px; padding: 5px 12px; font-size: .9rem; color: #fff; }
+  .case .go { color: #fff; font-weight: 600; border-bottom: 2px solid var(--salmon); padding-bottom: 2px; }
+  .shot { position: relative; }
+  .shot .screen { border-radius: 18px; overflow: hidden; box-shadow: 0 50px 80px -40px rgba(0,0,0,.7); background: #fff; }
+  .shot .phone { position: absolute; width: 30%; left: -6%; bottom: -12%; border-radius: 22px; padding: 6px; background: #0b1214; box-shadow: 0 30px 50px -20px rgba(0,0,0,.7); }
+  .shot .phone img { border-radius: 17px; aspect-ratio: 9 / 16; object-fit: cover; object-position: top; background: #fff; }
+  .shot.solo { display: flex; justify-content: center; }
+  .shot.solo .phone { position: relative; left: auto; bottom: auto; width: min(290px, 70%); }
+  @media (max-width: 900px) { .case, .case.flip { grid-template-columns: 1fr; gap: 40px; margin-top: 70px; } .case.flip .shot { order: 0; } .shot .phone { left: -2%; } }
 
+  /* ── servicios: menú en filas ── */
+  .services-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; }
+  .services-head p { color: var(--ink-2); max-width: 42ch; }
+  .services-head .hand { display: block; margin-top: 10px; }
+  .menu { position: relative; margin-top: 140px; border-top: 1px solid var(--ink); }
+  .menu > .sit { position: absolute; right: 10%; top: -142px; width: 150px; pointer-events: none; filter: drop-shadow(0 14px 16px rgba(21,25,27,.18)); }
+  .opt { position: relative; display: grid; grid-template-columns: 1.05fr 1.3fr auto; gap: 40px; align-items: center; padding: 34px 28px; border-bottom: 1px solid var(--line); }
+  .opt-name h3 { font-size: 1.7rem; }
+  .opt-name p { color: var(--ink-2); margin-top: 6px; font-size: 1rem; }
+  .opt ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; color: var(--ink-2); font-size: 1rem; }
+  .opt li { display: flex; gap: 10px; } .opt li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: .62em; border-radius: 50%; background: var(--salmon); }
+  .opt .price { font-family: var(--display); font-weight: 800; font-size: 2.3rem; letter-spacing: -.035em; line-height: 1; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .opt .price small { display: block; font-family: var(--text); font-weight: 500; font-size: .85rem; letter-spacing: 0; color: var(--ink-2); margin-bottom: 4px; }
+  .opt.star { background: var(--salmon); color: #fff; border-radius: 22px; border-bottom-color: transparent; margin: 10px -12px; padding: 40px; }
+  .opt.star .opt-name p, .opt.star ul, .opt.star .price small { color: rgba(255,255,255,.9); }
+  .opt.star li::before { background: #fff; }
+  .opt.star .flag { display: inline-block; background: var(--ink); color: #fff; font-size: .8rem; font-weight: 600; padding: 4px 10px; border-radius: 6px; margin-bottom: 10px; }
+  .own { margin-top: 26px; color: var(--ink-2); max-width: 70ch; }
+  .own strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 900px) {
+    .services-head { grid-template-columns: 1fr; gap: 16px; }
+    .opt { grid-template-columns: 1fr; gap: 16px; padding: 28px 4px; }
+    .opt .price { text-align: left; }
+    .opt.star { margin: 10px -8px; padding: 28px 22px; }
+    .menu { margin-top: 150px; } .menu > .sit { right: 6%; top: -126px; width: 132px; }
+  }
 
-  /* Presentación de trabajos: capturas reales, sin maquetas */
-  figure { margin: 0; }
-  .combo { position: relative; padding: 0 0 64px 56px; }
-  .combo .browser { border-radius: 14px; }
-  .browser .bar { align-items: center; }
-  .browser .bar span { margin-left: 10px; font: 500 .72rem "JetBrains Mono", monospace; color: #6b7a82; letter-spacing: .02em; }
-  .app { position: absolute; left: 0; bottom: 0; width: 28%; border-radius: 20px; overflow: hidden; background: #fff; border: 1px solid rgba(255,244,233,.25); box-shadow: 0 30px 60px -24px rgba(0,0,0,.7); }
-  .app img { width: 100%; height: auto; aspect-ratio: 9 / 14; object-fit: cover; object-position: top; }
-  .hero-combo { width: calc(100% + 120px); margin-right: -120px; }
-  .hero-combo .app { width: 30%; }
-  .combo.wide .sys { position: absolute; right: -24px; bottom: 0; width: 62%; box-shadow: 0 30px 60px -24px rgba(0,0,0,.8); }
-  .combo.wide { padding: 0 24px 120px 0; }
-  .solo { display: flex; justify-content: center; }
-  .solo .app { position: relative; width: 280px; }
-  .solo .app img { aspect-ratio: 9 / 15; }
-  @media (max-width: 900px) { .hero-combo { width: 100%; margin-right: 0; } .hero-combo .app { width: 34%; } .combo { padding: 0 0 40px 28px; } .app { width: 34%; border-radius: 14px; } .combo.wide { padding: 0 0 90px 0; } .combo.wide .sys { right: 0; } .solo .app { width: 230px; } }
+  /* ── quién está detrás + cómo trabajamos ── */
+  .about { padding-top: 40px; }
+  .about-card { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: start; background: var(--cream-2); border-radius: 32px; padding: 64px 56px 56px; margin-top: 120px; }
+  .about-copy p { color: var(--ink-2); margin-top: 18px; max-width: 46ch; }
+  .about-copy p strong { color: var(--ink); font-weight: 600; }
+  .about-copy .hand { margin-top: 22px; }
+  .how { list-style: none; counter-reset: how; margin: 6px 0 0; padding: 0; display: grid; gap: 0; }
+  .how li { counter-increment: how; display: grid; grid-template-columns: 52px 1fr; column-gap: 6px; padding: 20px 0; border-top: 1px solid var(--line); }
+  .how li:last-child { border-bottom: 1px solid var(--line); }
+  .how li::before { content: counter(how); grid-row: span 2; font-family: var(--display); font-weight: 800; font-size: 1.9rem; line-height: 1; color: var(--salmon-ink); }
+  .how b { font-family: var(--display); font-weight: 700; font-size: 1.25rem; letter-spacing: -.02em; }
+  .how span { color: var(--ink-2); margin-top: 4px; }
+  @media (max-width: 900px) { .about-card { grid-template-columns: 1fr; gap: 28px; padding: 48px 22px 26px; border-radius: 24px; margin-top: 100px; } }
 
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .step { border-top: 2px solid var(--ink); padding-top: 20px; }
-  .step .num { font: 500 .78rem "JetBrains Mono", monospace; color: var(--salmon); }
-  .step h3 { color: var(--ink); margin: 8px 0; }
-  .step p { color: var(--muted); margin: 0; }
-  @media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
-
-  .faq { display: grid; max-width: 760px; }
-  details { border-bottom: 1px solid var(--line); padding: 18px 0; }
-  summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; font-weight: 700; color: var(--ink); font-size: 1.08rem; }
+  /* ── preguntas ── */
+  .faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; }
+  details { border-bottom: 1px solid var(--line); padding: 22px 0; }
+  details:first-child { border-top: 1px solid var(--ink); }
+  summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; font-weight: 600; font-size: 1.15rem; }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; color: var(--salmon); font-size: 1.5rem; line-height: 1; transition: transform .2s; }
+  summary::after { content: "+"; color: var(--salmon-ink); font-size: 1.6rem; line-height: 1; transition: transform .2s var(--ease-out); }
   details[open] summary::after { transform: rotate(45deg); }
-  details p { margin: 10px 0 0; color: var(--muted); max-width: 62ch; }
-  .split { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; }
-  @media (max-width: 820px) { .split { grid-template-columns: 1fr; gap: 24px; } }
+  details p { margin-top: 10px; color: var(--ink-2); max-width: 60ch; }
+  @media (max-width: 860px) { .faq { grid-template-columns: 1fr; gap: 26px; } }
 
-  .cta { padding: 0 0 104px; }
-  .cta .box { position: relative; overflow: hidden; border-radius: 36px; background: var(--ink); color: var(--cream); padding: 72px 24px; text-align: center; isolation: isolate; }
-  .cta .box::before { content: ""; position: absolute; z-index: -1; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(255,111,111,.45), transparent 66%); left: 50%; top: 40%; transform: translateX(-50%); }
-  .cta h2 { color: var(--cream); }
-  .cta p { color: var(--mist); margin: 16px auto 32px; max-width: 44ch; }
-  .cta .ctas { justify-content: center; }
-
-  footer { padding: 28px 0 40px; font-size: .88rem; color: var(--muted); }
+  /* ── contacto ── */
+  .cta { padding: 0 0 40px; }
+  .cta .box { position: relative; border-radius: 40px; background: var(--powder); padding: 80px 56px; display: grid; grid-template-columns: 1.3fr .7fr; gap: 20px; align-items: end; overflow: hidden; }
+  .cta h2 { font-size: clamp(2.4rem, 5vw, 4.4rem); }
+  .cta p { margin-top: 18px; max-width: 38ch; font-size: 1.15rem; color: #4a3f3b; }
+  .cta .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+  .cta .wave { width: 100%; max-width: 320px; justify-self: center; margin-bottom: -80px; filter: drop-shadow(0 20px 26px rgba(21,25,27,.15)); }
+  @media (max-width: 860px) { .cta .box { grid-template-columns: 1fr; padding: 56px 24px 0; } .cta .wave { max-width: 200px; margin: 20px auto 0; } }
+  footer { padding: 30px 0 50px; color: var(--ink-2); font-size: .92rem; }
   footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
 
-  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  /* ── Belén acompaña el scroll: asoma desde el borde y cambia de pose por sección ── */
+  /* ── stickers ubicados en el diseño: cada uno en su lugar, nunca encima del contenido ── */
+  .stk { position: absolute; pointer-events: none; filter: drop-shadow(0 14px 18px rgba(21,25,27,.18)); }
+  .stk img { width: 100%; }
+  .say { position: absolute; white-space: nowrap; background: var(--ink); color: #fff; font-size: .86rem; font-weight: 600; padding: 7px 12px; border-radius: 14px 14px 14px 4px; }
+  /* historia: asoma desde el borde derecho de la pantalla */
+  .story { position: relative; overflow: clip; }
+  .stk.pared { right: -8px; bottom: 9vh; width: clamp(110px, 9vw, 150px); z-index: 3; }
+  .stk.pared .say { right: 84%; top: 4%; border-radius: 14px 14px 4px 14px; }
+  /* proyectos: con la lupa, al lado del título */
+  .work-head { position: relative; }
+  .stk.lupa { right: 0; top: -30px; width: clamp(96px, 9vw, 140px); }
+  .stk.lupa .say { right: 92%; top: 8%; border-radius: 14px 14px 4px 14px; background: var(--salmon); }
+  /* pasos: apoyada sobre la línea de arriba */
+  .stk.abajo { right: 8%; bottom: calc(100% - 4px); width: clamp(170px, 17vw, 240px); }
+  /* preguntas: brazos cruzados debajo del título */
+  .faq-head .stk.cruz { position: relative; display: block; width: clamp(120px, 12vw, 170px); margin-top: 34px; }
+  .faq-head .stk.cruz .say { left: 78%; top: 2%; }
+  @media (max-width: 900px) {
+    .stk.pared { display: none; }
+    .work-head { padding-top: 170px; } .stk.lupa { width: 74px; top: 0; right: 4px; } .stk.lupa .say { right: 104%; top: 30%; }
+    .stk.abajo { width: 150px; right: 6%; }
+    .faq-head .stk.cruz { display: none; }
+  }
+
+  /* entradas */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms); }
   .reveal.in { opacity: 1; transform: none; }
+  .rise { animation: rise .8s var(--ease-out) both; animation-delay: calc(var(--d, 0) * 1ms); }
+  @keyframes rise { from { opacity: 0; transform: translateY(22px); } }
   @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
     html { scroll-behavior: auto; }
+    .reveal, .rise { opacity: 1; transform: none; transition: none; animation: none; }
+
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#contenido">Ir al contenido</a>
 
 <header id="top">
-  <div class="wrap nav">
-    <a class="brand" href="#" aria-label="pola.web, inicio">
-      <svg viewBox="222 299 828 667" fill="#FF6F6F" aria-hidden="true"><rect x="222" y="452" width="188" height="514"/><path d="M452 452 H474 A160 160 0 0 1 474 772 H452 Z"/><path d="M667 824 V299 A205 205 0 0 1 872 504 V824 Z"/><rect x="667" y="855" width="383" height="110"/></svg>
-      <span>POLA.WEB</span>
-    </a>
-    <nav aria-label="Secciones">
-      <a href="#servicios">Servicios</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#preguntas">Preguntas</a>
-    </nav>
-    <a class="btn btn-main" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">Escribime</a>
+  <div class="wrap bar">
+    <a class="logo" href="#" aria-label="pola.web, inicio"><svg viewBox="222 299 828 667" fill="#FF6F6F" aria-hidden="true"><rect x="222" y="452" width="188" height="514"/><path d="M452 452 H474 A160 160 0 0 1 474 772 H452 Z"/><path d="M667 824 V299 A205 205 0 0 1 872 504 V824 Z"/><rect x="667" y="855" width="383" height="110"/></svg>pola.web</a>
+    <nav aria-label="Secciones"><a href="#proyectos">Proyectos</a><a href="#servicios">Servicios</a><a href="#como">Quién soy</a><a href="#preguntas">Preguntas</a></nav>
+    <a class="pill salmon small" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">Escribime</a>
   </div>
 </header>
 
-<main>
+<main id="contenido">
   <section class="hero">
-    <div class="glow a" aria-hidden="true"></div><div class="glow b" aria-hidden="true"></div>
     <div class="wrap hero-grid">
       <div>
-        <span class="label">Webs y sistemas a medida</span>
-        <h1>Tu negocio, <em class="serif">ordenado</em> y en internet.</h1>
-        <p class="sub">Reservas, turnos, pagos y avisos por WhatsApp, en un sistema hecho para cómo trabajás vos.</p>
-        <div class="ctas">
-          <a class="btn btn-main" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/></svg>
-            Contame tu idea</a>
-          <a class="btn btn-glass" href="#proyectos">Ver proyectos</a>
+        <p class="eyebrow rise" style="--d:0">Estudio de webs y sistemas a medida · Pilar, Buenos Aires</p>
+        <h1 class="rise" style="--d:80"><span class="rot" aria-live="polite"><span class="on">Clientes.</span><span>Pedidos.</span><span>Turnos.</span><span>Pagos.</span></span>Todo en un solo sistema.</h1>
+        <p class="sub rise" style="--d:180">Diseño y programo sistemas para negocios que hoy se organizan con papelitos, cuadernos y WhatsApp. Turnos, pedidos, pagos y clientes en un solo lugar, fácil de usar desde la compu o el celular.</p>
+        <div class="ctas rise" style="--d:260">
+          <a class="pill dark" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/></svg>Contame tu idea</a>
+          <a class="link" href="#proyectos">Ver proyectos</a>
         </div>
-        <span class="hand">la primera charla es sin costo ✿</span>
+        <p class="note rise" style="--d:320">La primera charla es sin costo. Lo pagás una vez y es tuyo.</p>
       </div>
-      <figure class="combo hero-combo">
-        <div class="browser"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>quintalaunion.com</span></div><img src="img/quinta-web.png" alt="Web de Quinta La Unión" width="2560" height="1600"></div>
-        <div class="app"><img src="img/quinta-panel.png" alt="Panel de Quinta La Unión en el celular" width="780" height="1688"></div>
-      </figure>
+      <div class="art">
+        <img class="belen rise" style="--d:200" src="img/b-muestra.webp" alt="Belén, de pola.web, mostrando un sistema en la notebook" width="1018" height="1400">
+        <p class="hello hand rise" style="--d:900">hola, soy Belén<svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 6 C 20 4, 38 12, 48 30"/><path d="M38 28 L 49 32 L 50 20"/></svg></p>
+                <div class="float b rise" style="--d:720"><span class="ok">✓ Pago registrado</span><br>Marta Gómez</div>
+        <div class="float c rise" style="--d:840">Comprobante listo<br><b>Enviar por WhatsApp</b></div>
+      </div>
     </div>
+    <div class="strip"><div class="wrap"><span>Funcionando hoy en</span><b>Quinta La Unión</b><b>Aluminio Más Perfiles</b><b>La Liga</b></div></div>
   </section>
 
-  <div class="proof"><div class="wrap"><span>Proyectos reales:</span><strong>Quinta La Unión</strong><span>·</span><strong>Aluminio Más Perfiles</strong><span>·</span><strong>La Liga</strong></div></div>
-
-  <section id="servicios">
-    <div class="wrap">
-      <div class="head reveal">
-        <div><span class="label">Servicios</span><h2 style="margin-top:14px">Elegí <em class="serif">dónde</em> arrancar.</h2></div>
-        <p>Cada presupuesto se arma según lo que tu negocio necesita. Estos son los puntos de partida.</p>
-      </div>
-      <div class="bento">
-        <article class="tier reveal">
-          <span class="num">01</span>
-          <h3>Web</h3>
-          <ul><li>Diseño a medida, pensado para el celular</li><li>Tus servicios, fotos y contacto</li><li>Botón directo a tu WhatsApp</li></ul>
-          <p class="price">$180.000<small>desde · pago único</small></p>
-        </article>
-        <article class="tier star reveal">
-          <span class="tag">El más pedido</span>
-          <span class="num">02</span>
-          <h3>Web + gestión</h3>
-          <ul><li>Todo lo de la web</li><li>Turnos, reservas o pedidos</li><li>Panel en tu celular, como una app</li></ul>
-          <p class="price">$250.000<small>desde · pago único</small></p>
-        </article>
-        <article class="tier reveal">
-          <span class="num">03</span>
-          <h3>Sistema completo</h3>
-          <ul><li>Pagos, señas y saldos</li><li>Comprobantes y avisos por WhatsApp</li><li>Lo que tu rubro necesite</li></ul>
-          <p class="price">$350.000<small>desde · pago único</small></p>
-        </article>
-      </div>
-      <div class="own reveal">
-        <p>Lo pagás una vez y es tuyo. <span>Sin abonos obligatorios; el mantenimiento es opcional.</span></p>
-        <span class="hand">sin letra chica</span>
+  <section id="historia" class="story">
+    <div class="stk pared" aria-hidden="true"><img src="img/b-asoma-pared.webp" alt="" width="860" height="1400"><span class="say">¿Te suena?</span></div>
+    <div class="story-pin">
+      <div class="wrap story-grid">
+        <div class="story-copy" aria-live="polite">
+          <h2 class="st st1">El negocio creció. Y todo quedó en <span class="hl">papelitos, cuadernos y chats.</span></h2>
+          <h2 class="st st2">Con pola.web, todo eso pasa a <span class="hl">un solo sistema.</span></h2>
+          <h2 class="st st3">Y lo que buscás, <span class="hl">lo encontrás en segundos.</span></h2>
+        </div>
+        <div class="stage" aria-hidden="true">
+          <div class="note" style="--x:4%;--y:6%;--r:-8deg">Marta → ¿seña 50 mil? ✓</div>
+          <div class="note y" style="--x:52%;--y:2%;--r:6deg">Turno jueves 15 hs<br>(¿o era 16?)</div>
+          <div class="note p" style="--x:62%;--y:38%;--r:-4deg">Pedido ventana<br>1,20 × 1,10</div>
+          <div class="note" style="--x:10%;--y:44%;--r:5deg">¿¿Quién me debe??</div>
+          <div class="note y" style="--x:30%;--y:70%;--r:-6deg">Llamar a Rubén!!</div>
+          <div class="note p" style="--x:66%;--y:74%;--r:8deg">Reserva sábado<br>— confirmar</div>
+          <div class="note" style="--x:36%;--y:24%;--r:-2deg">Saldo $130.000 ??</div>
+          <div class="device">
+            <div class="d-top"><svg viewBox="222 299 828 667" fill="#FF6F6F"><rect x="222" y="452" width="188" height="514"/><path d="M452 452 H474 A160 160 0 0 1 474 772 H452 Z"/><path d="M667 824 V299 A205 205 0 0 1 872 504 V824 Z"/><rect x="667" y="855" width="383" height="110"/></svg>Mi negocio</div>
+            <div class="d-search">🔍 <span class="typed"></span><i></i></div>
+            <div class="row r1"><div><b>Marta Gómez</b><span>Ventana 1,20 × 1,10</span></div><em class="t-salmon">Saldo $130.000</em></div>
+            <div class="row r2"><div><b>Turno · jueves 15:00</b><span>Lucía Romero</span></div><em class="t-ok">Confirmado</em></div>
+            <div class="row r3"><div><b>Reserva · sábado 12</b><span>Cumple de Sofía</span></div><em class="t-ok">Seña ✓</em></div>
+            <p class="d-note">Datos de ejemplo</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="work" id="proyectos">
     <div class="wrap">
-      <div class="head reveal">
-        <div><span class="label">Proyectos reales</span><h2 style="margin-top:14px">Negocios distintos. <em class="serif">Todo</em> en orden.</h2></div>
-        <p>Las capturas usan datos de ejemplo para cuidar la privacidad de sus clientes.</p>
-      </div>
+      <div class="reveal work-head"><div class="stk lupa" aria-hidden="true"><img src="img/b-lupa.webp" alt="" width="695" height="1400"><span class="say">Mirá de cerca</span></div><span class="kicker" style="color:var(--powder)">Proyectos</span><h2>Negocios reales, funcionando.</h2><p class="lead">Tres sistemas en uso. Las capturas usan datos de ejemplo para cuidar la privacidad de sus clientes.</p></div>
 
       <article class="case reveal">
         <div>
-          <span class="meta">Salón de eventos · Pilar</span>
-          <h3 style="margin-top:10px">Quinta La Unión</h3>
+          <span class="kind">Salón de eventos · Pilar</span>
+          <h3>Quinta La Unión</h3>
           <p>Web con disponibilidad en tiempo real y un panel que la dueña usa desde el celular: reservas, pagos, saldos y comprobantes listos para WhatsApp.</p>
-          <ul class="pills"><li>Web</li><li>Reservas</li><li>Pagos y saldos</li><li>Comprobantes</li></ul>
-          <a class="more" href="https://quintalaunion.com" target="_blank" rel="noopener">Ver quintalaunion.com ↗</a>
+          <ul class="tags"><li>Web</li><li>Reservas</li><li>Pagos y saldos</li><li>Comprobantes</li></ul>
+          <a class="go" href="https://quintalaunion.com" target="_blank" rel="noopener">Ver quintalaunion.com ↗</a>
         </div>
-        <figure class="combo">
-          <div class="browser"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>quintalaunion.com</span></div><img src="img/quinta-web.png" alt="Web de Quinta La Unión" width="2560" height="1600" loading="lazy"></div>
-          <div class="app"><img src="img/quinta-calendario.png" alt="Calendario de reservas del panel" width="780" height="1688" loading="lazy"></div>
-        </figure>
+        <div class="shot">
+          <div class="screen"><img src="img/quinta-web.png" alt="Web de Quinta La Unión" width="2560" height="1600" loading="lazy"></div>
+          <div class="phone"><img src="img/quinta-calendario.png" alt="Calendario de reservas del panel" width="780" height="1688" loading="lazy"></div>
+        </div>
       </article>
 
-      <article class="case rev reveal">
-        <figure class="combo wide">
-          <div class="browser"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>aluminiomasperfiles.com</span></div><img src="img/aluminio-web.png" alt="Web de Aluminio Más Perfiles" width="2560" height="1600" loading="lazy"></div>
-          <div class="browser sys"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>Sistema de gestión</span></div><img src="img/aluminio-pedido.png" alt="Pedido en el sistema de gestión, con datos de ejemplo" width="2000" height="1250" loading="lazy"></div>
-        </figure>
+      <article class="case flip reveal">
+        <div class="shot">
+          <div class="screen"><img src="img/aluminio-pedido.png" alt="Pedido en el sistema de gestión de Aluminio Más Perfiles, con datos de ejemplo" width="2000" height="1250" loading="lazy"></div>
+        </div>
         <div>
-          <span class="meta">Fábrica de aberturas</span>
-          <h3 style="margin-top:10px">Aluminio Más Perfiles</h3>
+          <span class="kind">Fábrica de aberturas</span>
+          <h3>Aluminio Más Perfiles</h3>
           <p>Su web, y un sistema que pasó las boletas de papel a pedidos digitales: cada venta con sus productos, señas y saldo, seguida desde producción hasta la entrega.</p>
-          <ul class="pills"><li>Web</li><li>Boletas digitales</li><li>Producción</li><li>Entregas</li><li>WhatsApp</li></ul>
-          <a class="more" href="https://aluminiomasperfiles.com" target="_blank" rel="noopener">Ver aluminiomasperfiles.com ↗</a>
+          <ul class="tags"><li>Web</li><li>Boletas digitales</li><li>Producción</li><li>Entregas</li></ul>
+          <a class="go" href="https://aluminiomasperfiles.com" target="_blank" rel="noopener">Ver aluminiomasperfiles.com ↗</a>
         </div>
       </article>
 
       <article class="case reveal">
         <div>
-          <span class="meta">Gestión comercial y financiera · En desarrollo</span>
-          <h3 style="margin-top:10px">La Liga</h3>
+          <span class="kind">Gestión comercial y financiera · En desarrollo</span>
+          <h3>La Liga</h3>
           <p>Un sistema para ordenar toda la operación: marcas, acuerdos, facturación, cobros, comisiones y reparto entre socios. Cada mañana muestra en pocas palabras qué necesita atención.</p>
-          <ul class="pills"><li>Facturación</li><li>Cobros</li><li>Comisiones</li><li>Reparto</li></ul>
+          <ul class="tags"><li>Facturación</li><li>Cobros</li><li>Comisiones</li><li>Reparto</li></ul>
         </div>
-        <figure class="solo"><div class="app"><img src="img/liga-cobros.png" alt="Pantalla de cobros del sistema de La Liga, con datos de ejemplo" width="975" height="2110" loading="lazy"></div></figure>
+        <div class="shot solo"><div class="phone"><img src="img/liga-cobros.png" alt="Pantalla de cobros de La Liga, con datos de ejemplo" width="975" height="2110" loading="lazy"></div></div>
       </article>
     </div>
   </section>
 
-  <section id="como">
+  <section id="como" class="about">
     <div class="wrap">
-      <div class="head reveal"><div><span class="label">Cómo trabajo</span><h2 style="margin-top:14px">Simple, <em class="serif">de punta</em> a punta.</h2></div></div>
-      <div class="steps">
-        <div class="step reveal"><span class="num">01</span><h3>Charlamos</h3><p>Me contás qué hace tu negocio y qué querés resolver. Sin costo.</p></div>
-        <div class="step reveal"><span class="num">02</span><h3>Lo construyo</h3><p>Te paso propuesta y presupuesto, y te muestro avances en el camino.</p></div>
-        <div class="step reveal"><span class="num">03</span><h3>Es tuyo</h3><p>Te lo entrego funcionando, te enseño a usarlo y sigo cerca.</p></div>
+      <div class="about-card reveal">
+        <div class="stk abajo" aria-hidden="true"><img src="img/b-asoma-abajo.webp" alt="" width="1313" height="900"></div>
+        <div class="about-copy">
+          <span class="kicker">Quién está detrás</span>
+          <h2>Del otro lado hay una persona.</h2>
+          <p>Soy Belén. Diseño y programo cada web y cada sistema, y hablás directamente conmigo desde la primera charla hasta después de la entrega.</p>
+          <p>Trabajo con negocios que crecieron y necesitan ordenarse: <strong>salones de eventos, fábricas, centros de estética, comercios y profesionales.</strong></p>
+          <span class="hand">te respondo yo, no un bot</span>
+        </div>
+        <ol class="how">
+          <li><b>Charlamos</b><span>Me contás qué hace tu negocio y qué querés resolver. Sin costo.</span></li>
+          <li><b>Lo construyo</b><span>Te paso propuesta y presupuesto, y te muestro avances en el camino.</span></li>
+          <li><b>Es tuyo</b><span>Te lo entrego funcionando, te enseño a usarlo y sigo cerca.</span></li>
+        </ol>
       </div>
     </div>
   </section>
+
+  <section class="services" id="servicios">
+    <div class="wrap">
+      <div class="services-head reveal">
+        <div><span class="kicker">Servicios</span><h2>Elegí dónde arrancar.</h2></div>
+        <p>Cada presupuesto se arma según lo que tu negocio necesita. Estos son los puntos de partida. <span class="hand">sin letra chica</span></p>
+      </div>
+      <div class="menu">
+        <img class="sit" src="img/b-sentada.webp" alt="" width="1008" height="1400" loading="lazy">
+        <article class="opt reveal">
+          <div class="opt-name"><h3>Web</h3><p>Para que te encuentren y te escriban.</p></div>
+          <ul><li>Diseño a medida, pensado para el celular</li><li>Tus servicios, fotos y contacto</li><li>Botón directo a tu WhatsApp</li></ul>
+          <p class="price"><small>desde</small>$180.000</p>
+        </article>
+        <article class="opt star reveal">
+          <div class="opt-name"><span class="flag">El más pedido</span><h3>Web + gestión</h3><p>Para dejar de anotar turnos y pedidos a mano.</p></div>
+          <ul><li>Todo lo de la web</li><li>Turnos, reservas o pedidos</li><li>Panel en tu celular, como una app</li></ul>
+          <p class="price"><small>desde</small>$250.000</p>
+        </article>
+        <article class="opt reveal">
+          <div class="opt-name"><h3>Sistema completo</h3><p>Para manejar pagos, señas y saldos sin planillas.</p></div>
+          <ul><li>Pagos, señas y saldos</li><li>Comprobantes y avisos por WhatsApp</li><li>Lo que tu rubro necesite</li></ul>
+          <p class="price"><small>desde</small>$350.000</p>
+        </article>
+      </div>
+      <p class="own reveal">Todos los precios son <strong>pago único</strong>: lo pagás una vez y es tuyo. Sin abonos obligatorios; el mantenimiento mensual es opcional.</p>
+    </div>
+  </section>
+
+
 
   <section id="preguntas" style="padding-top:0">
-    <div class="wrap split">
-      <div class="reveal"><span class="label">Preguntas</span><h2 style="margin-top:14px">Lo que <em class="serif">más</em> me preguntan.</h2></div>
-      <div class="faq reveal">
+    <div class="wrap faq">
+      <div class="faq-head reveal"><span class="kicker">Preguntas</span><h2>Lo que más me preguntan.</h2><div class="stk cruz" aria-hidden="true"><img src="img/b-cruzada.webp" alt="" width="875" height="1400"><span class="say">¿Dudas?</span></div></div>
+      <div class="reveal" style="--i:1">
         <details><summary>¿Tengo que pagar todos los meses?</summary><p>No. Lo pagás una vez y es tuyo. Si querés que me ocupe de cambios y actualizaciones, hay un mantenimiento mensual opcional.</p></details>
         <details><summary>No me llevo bien con la tecnología. ¿Lo voy a poder usar?</summary><p>Sí. Lo diseño para que sea simple, incluso desde el celular, y te enseño paso a paso.</p></details>
         <details><summary>¿Sirve para mi rubro?</summary><p>Salones, fábricas, estética, profesionales, comercios, servicios… Contame qué hacés y vemos qué te sirve de verdad.</p></details>
@@ -318,33 +437,84 @@
   <section class="cta" id="contacto">
     <div class="wrap">
       <div class="box reveal">
-        <span class="label" style="justify-content:center">Hablemos</span>
-        <h2 style="margin-top:16px">¿Tenés una idea? <em class="serif">Contámela.</em></h2>
-        <p>Aunque sea un borrador. Te respondo yo, por WhatsApp o por Instagram.</p>
-        <div class="ctas">
-          <a class="btn btn-main" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">WhatsApp 11 2852-4241</a>
-          <a class="btn btn-glass" href="https://www.instagram.com/pola.web/" target="_blank" rel="noopener">@pola.web</a>
+        <div>
+          <h2>¿Tenés una idea? Contámela.</h2>
+          <p>Aunque sea un borrador. Contame qué hace tu negocio y qué te gustaría resolver; te respondo yo, por WhatsApp o por Instagram.</p>
+          <div class="ctas">
+            <a class="pill dark" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">WhatsApp 11 2852-4241</a>
+            <a class="pill line" href="https://www.instagram.com/pola.web/" target="_blank" rel="noopener">@pola.web</a>
+          </div>
         </div>
+        <img class="wave" src="img/b-pulgar.webp" alt="Belén guiñando el ojo con el pulgar arriba" width="748" height="932" loading="lazy">
       </div>
     </div>
   </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>pola.web · Webs y sistemas a medida · Pilar, Buenos Aires</span>
-    <span><a href="mailto:hola@somospola.com">hola@somospola.com</a> · <a href="privacidad.html">Privacidad</a></span>
-  </div>
-</footer>
+<footer><div class="wrap"><span>pola.web · Webs y sistemas a medida · Pilar, Buenos Aires</span><span><a href="mailto:hola@somospola.com">hola@somospola.com</a> · <a href="privacidad.html">Privacidad</a></span></div></footer>
 
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
+  // barra con borde al bajar
   const header = document.getElementById('top');
-  const onScroll = () => header.classList.toggle('scrolled', scrollY > 24);
+  const onScroll = () => header.classList.toggle('scrolled', scrollY > 10);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }, { threshold: .12 }) : null;
-  document.querySelectorAll('.reveal').forEach((el) => io ? io.observe(el) : el.classList.add('in'));
+
+  // entradas al aparecer
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // palabra que cambia en la portada
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const words = [...document.querySelectorAll('.hero .rot span')];
+  if (!reduce) { let i = 0; setInterval(() => { const prev = words[i]; prev.classList.replace('on', 'off'); setTimeout(() => prev.classList.remove('off'), 550); i = (i + 1) % words.length; words[i].classList.add('on'); }, 2400); }
+
+  // stickers: entran una sola vez cuando su sección aparece (con el globito un instante después)
+  if (!reduce && window.gsap) {
+    gsap.utils.toArray('.stk:not(.pared), .menu > .sit').forEach((el) => {
+      const say = el.querySelector('.say'); const fromY = el.classList.contains('abajo') ? 40 : 20;
+      const tl = gsap.timeline({ scrollTrigger: { trigger: el.parentElement, start: 'top 80%', once: true } });
+      tl.from(el, { y: fromY, opacity: 0, duration: .8, ease: 'power3.out' });
+      if (say) tl.from(say, { opacity: 0, y: 8, scale: .9, duration: .35, ease: 'power2.out' }, '-=.2');
+    });
+  }
+
+  // ── historia con scroll (GSAP + ScrollTrigger): los papelitos vuelan al sistema
+  const story = document.querySelector('.story');
+  if (reduce || !window.gsap) { story.classList.add('static'); story.querySelector('.typed').textContent = 'Marta'; story.querySelector('.r1').classList.add('found'); }
+  else {
+    gsap.registerPlugin(ScrollTrigger);
+    const stage = story.querySelector('.stage'), device = story.querySelector('.device'), notes = gsap.utils.toArray('.note'), typed = story.querySelector('.typed');
+    const toCenter = (el, axis) => { const s = stage.getBoundingClientRect(), b = el.getBoundingClientRect(); return axis === 'x' ? s.left + s.width / 2 - (b.left + b.width / 2) : s.top + s.height / 2 - (b.top + b.height / 2); };
+    gsap.set(device, { xPercent: -50, yPercent: -50, x: 0, y: 0, left: '50%', top: '50%', rotationX: 38, rotationY: -28, rotationZ: 6, scale: .82, z: -200 });
+    story.querySelector('.device').style.transform = '';
+    notes.forEach((n, i) => { gsap.set(n, { z: (i % 3) * 70 - 70 }); gsap.to(n, { y: '+=8', rotation: '+=2', duration: 1.6 + i * .2, yoyo: true, repeat: -1, ease: 'sine.inOut' }); });
+    const typing = { n: 0 };
+    // Belén asoma desde el borde mientras dura la historia (entra y sale una sola vez por pasada)
+    const pared = story.querySelector('.stk.pared'), paredSay = pared.querySelector('.say'); let paredOn = null;
+    gsap.set(pared, { xPercent: 115 }); gsap.set(paredSay, { opacity: 0 });
+    const showPared = (on) => { if (on === paredOn) return; paredOn = on;
+      gsap.to(pared, { xPercent: on ? 0 : 115, duration: on ? .6 : .4, ease: on ? 'back.out(1.4)' : 'power2.in', overwrite: true });
+      gsap.to(paredSay, { opacity: on ? 1 : 0, scale: on ? 1 : .9, duration: .25, delay: on ? .45 : 0, overwrite: true }); };
+    const tl = gsap.timeline({ scrollTrigger: { trigger: story, start: 'top top', end: '+=220%', pin: true, scrub: .6, invalidateOnRefresh: true, onUpdate: (st) => showPared(st.progress > .03 && st.progress < .9) } });
+    tl.to({}, { duration: .5 }, 0)
+      .to(notes, { x: (i, el) => toCenter(el, 'x'), y: (i, el) => toCenter(el, 'y'), z: 260, rotationY: (i) => (i % 2 ? 160 : -160), scale: .15, opacity: 0, stagger: .06, duration: 1, ease: 'power2.in' }, 'fly')
+      .to('.st1', { autoAlpha: 0, y: -20, duration: .3 }, 'fly')
+      .fromTo('.st2', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .3 }, 'fly+=.35')
+      .to(device, { opacity: 1, scale: 1, z: 0, rotationX: 12, rotationY: -14, rotationZ: 0, duration: .9, ease: 'power3.out' }, 'fly+=.6')
+      .to('.row', { opacity: 1, y: 0, stagger: .15, duration: .4 }, '>-.1')
+      .to('.st2', { autoAlpha: 0, y: -20, duration: .3 }, 'find')
+      .fromTo('.st3', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .3 }, 'find+=.35')
+      .to(typing, { n: 5, duration: .6, ease: 'none', onUpdate: () => { typed.textContent = 'Marta'.slice(0, Math.round(typing.n)); } }, 'find')
+      .to('.row.r2, .row.r3', { opacity: .35, duration: .3 }, 'find+=.6')
+      .to('.row.r1', { z: 50, scale: 1.04, duration: .4, ease: 'back.out(2)' }, 'find+=.6')
+      .to(device, { rotationX: 4, rotationY: -4, duration: .6 }, 'find+=.4')
+      .add(() => story.querySelector('.r1').classList.toggle('found', tl.scrollTrigger.direction > 0), 'find+=.6')
+      .to({}, { duration: .3 });
+  }
 </script>
 </body>
 </html>
