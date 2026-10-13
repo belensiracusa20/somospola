@@ -165,6 +165,17 @@
   .shot.solo .phone { position: relative; left: auto; bottom: auto; width: min(290px, 70%); }
   @media (max-width: 900px) { .case, .case.flip { grid-template-columns: 1fr; gap: 40px; margin-top: 70px; } .case.flip .shot { order: 0; } .shot .phone { left: -2%; } }
 
+  /* ── ejemplos por rubro: demos navegables ── */
+  .demos-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; }
+  .demos-head p { color: var(--ink-2); max-width: 42ch; }
+  .demos { display: flex; gap: 16px; margin-top: 44px; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+  .demo-card { flex: 0 0 230px; scroll-snap-align: start; display: block; transition: transform .25s var(--ease-out); }
+  .demo-card .frame { border-radius: 28px; padding: 7px; background: var(--ink); box-shadow: 0 26px 40px -26px rgba(21,25,27,.45); }
+  .demo-card img { border-radius: 22px; width: 100%; aspect-ratio: 390 / 700; object-fit: cover; object-position: top; }
+  .demo-card b { display: block; margin-top: 14px; font-weight: 600; } .demo-card span { color: var(--ink-2); font-size: .92rem; }
+  @media (hover: hover) and (pointer: fine) { .demo-card:hover { transform: translateY(-6px); } }
+  @media (max-width: 860px) { .demos-head { grid-template-columns: 1fr; gap: 14px; } .demo-card { flex-basis: 200px; } }
+
   /* ── servicios: menú en filas ── */
   .services-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; }
   .services-head p { color: var(--ink-2); max-width: 42ch; }
@@ -271,7 +282,7 @@
 <header id="top">
   <div class="wrap bar">
     <a class="logo" href="#" aria-label="pola.web, inicio"><svg viewBox="222 299 828 667" fill="#FF6F6F" aria-hidden="true"><rect x="222" y="452" width="188" height="514"/><path d="M452 452 H474 A160 160 0 0 1 474 772 H452 Z"/><path d="M667 824 V299 A205 205 0 0 1 872 504 V824 Z"/><rect x="667" y="855" width="383" height="110"/></svg>pola.web</a>
-    <nav aria-label="Secciones"><a href="#proyectos">Proyectos</a><a href="#servicios">Servicios</a><a href="#como">Quién soy</a><a href="#preguntas">Preguntas</a></nav>
+    <nav aria-label="Secciones"><a href="#proyectos">Proyectos</a><a href="#ejemplos">Ejemplos</a><a href="#servicios">Servicios</a><a href="#como">Quién soy</a><a href="#preguntas">Preguntas</a></nav>
     <a class="pill salmon small" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">Escribime</a>
   </div>
 </header>
@@ -388,6 +399,22 @@
           <li><b>Lo construyo</b><span>Te paso propuesta y presupuesto, y te muestro avances en el camino.</span></li>
           <li><b>Es tuyo</b><span>Te lo entrego funcionando, te enseño a usarlo y sigo cerca.</span></li>
         </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="ejemplos">
+    <div class="wrap">
+      <div class="demos-head reveal">
+        <div><span class="kicker">Ejemplos por rubro</span><h2>Mirá cómo quedaría la tuya.</h2></div>
+        <p>Webs de ejemplo con negocios inventados, para que pruebes cómo funciona: reservar un turno, elegir una fecha o armar un pedido. <span class="hand">tocalas, funcionan</span></p>
+      </div>
+      <div class="demos">
+        <a class="demo-card reveal" href="demo/estetica/" target="_blank" rel="noopener"><div class="frame"><img src="img/demo-estetica.webp" alt="Demo de web para estética y uñas" width="390" height="700" loading="lazy"></div><b>Estética y uñas</b><span>Turnos con seña · probala ↗</span></a>
+        <a class="demo-card reveal" href="demo/quinta/" target="_blank" rel="noopener"><div class="frame"><img src="img/demo-quinta.webp" alt="Demo de web para quinta o salón" width="390" height="700" loading="lazy"></div><b>Quinta o salón</b><span>Calendario de fechas · probala ↗</span></a>
+        <a class="demo-card reveal" href="demo/pasteleria/" target="_blank" rel="noopener"><div class="frame"><img src="img/demo-pasteleria.webp" alt="Demo de web para pastelería" width="390" height="700" loading="lazy"></div><b>Pastelería</b><span>Pedidos por WhatsApp · probala ↗</span></a>
+        <a class="demo-card reveal" href="demo/padel/" target="_blank" rel="noopener"><div class="frame"><img src="img/demo-padel.webp" alt="Demo de web para club de pádel" width="390" height="700" loading="lazy"></div><b>Club de pádel</b><span>Turnero por cancha · probala ↗</span></a>
+        <a class="demo-card reveal" href="demo/consultorio/" target="_blank" rel="noopener"><div class="frame"><img src="img/demo-consultorio.webp" alt="Demo de web para consultorio" width="390" height="700" loading="lazy"></div><b>Consultorio</b><span>Turnos online · probala ↗</span></a>
       </div>
     </div>
   </section>

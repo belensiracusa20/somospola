@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quinta Los Aromos (demo)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #F4F1E8; --ink: #1F2A22; --muted: #66705f; --green: #2F4A35; --gold: #C9A45C; --line: #DCD6C4; --free: #E3EEDD; --taken: #EEDFD9; --ease: cubic-bezier(.23,1,.32,1); }
+  * { box-sizing: border-box; } body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 Karla, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; } a { color: inherit; } h1, h2, h3, p { margin: 0; }
+  h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; line-height: 1; letter-spacing: -.01em; }
+  .demo { background: var(--ink); color: #fff; font-size: .82rem; text-align: center; padding: 8px 14px; } .demo a { color: var(--gold); font-weight: 700; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 18px; }
+  .hero { position: relative; isolation: isolate; min-height: 560px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 0 34px; overflow: hidden; }
+  .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(.7); }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(20,28,22,.55), rgba(20,28,22,.15) 35%, rgba(20,28,22,.8)); }
+  .nav { display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; letter-spacing: .04em; } .logo small { display: block; font-family: Karla; font-size: .62rem; letter-spacing: .3em; opacity: .85; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; height: 50px; padding: 0 24px; border-radius: 999px; background: var(--gold); color: var(--ink); font-weight: 700; text-decoration: none; border: 0; cursor: pointer; transition: transform .15s var(--ease); }
+  .btn:active { transform: scale(.97); } .btn.ghost { background: rgba(255,255,255,.16); color: #fff; backdrop-filter: blur(6px); height: 42px; padding: 0 18px; }
+  .hero h1 { font-size: clamp(3rem, 8vw, 5.6rem); max-width: 12ch; } .hero h1 i { color: var(--gold); }
+  .hero p { margin: 14px 0 22px; max-width: 36ch; font-size: 1.08rem; opacity: .92; }
+  section { padding: 54px 0; } .sec h2 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: 18px; }
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .plan { position: relative; border-radius: 26px; overflow: hidden; min-height: 300px; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; }
+  .plan img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; } .plan::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(transparent 30%, rgba(20,28,22,.85)); }
+  .plan small { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .75rem; color: var(--gold); } .plan h3 { font-size: 2.2rem; margin: 4px 0; } .plan p { opacity: .9; font-size: .95rem; }
+  /* calendario */
+  .calwrap { display: grid; grid-template-columns: 1fr .8fr; gap: 22px; align-items: start; }
+  .cal { background: #fff; border-radius: 26px; padding: 22px; box-shadow: 0 30px 60px -40px rgba(31,42,34,.45); }
+  .cal-h { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; } .cal-h h3 { font-size: 1.9rem; text-transform: capitalize; }
+  .cal-h button { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--line); background: #fff; font-size: 1.1rem; cursor: pointer; }
+  .grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .grid b { text-align: center; font-size: .75rem; color: var(--muted); padding-bottom: 4px; }
+  .grid button { aspect-ratio: 1; border: 0; border-radius: 12px; font: 700 .98rem Karla, sans-serif; cursor: pointer; background: var(--free); color: #2b5a33; transition: transform .12s var(--ease); }
+  .grid button:active { transform: scale(.94); }
+  .grid button.x { background: var(--taken); color: #a14a3a; text-decoration: line-through; cursor: default; } .grid button.past { background: transparent; color: #bbb; cursor: default; }
+  .grid button.on { background: var(--green); color: #fff; } .grid span { aspect-ratio: 1; }
+  .leg { display: flex; gap: 16px; margin-top: 14px; font-size: .85rem; color: var(--muted); } .leg i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 6px; }
+  .pick { background: var(--green); color: #fff; border-radius: 26px; padding: 24px; }
+  .pick h3 { font-size: 2rem; margin-bottom: 8px; } .pick p { opacity: .85; margin-bottom: 16px; }
+  .pick .opts { display: grid; gap: 8px; margin-bottom: 18px; }
+  .pick .opts button { text-align: left; padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(255,255,255,.25); background: transparent; color: #fff; font: inherit; cursor: pointer; }
+  .pick .opts button.on { background: #fff; color: var(--ink); }
+  .pick .btn { width: 100%; } .pick .btn[aria-disabled] { opacity: .45; pointer-events: none; }
+  .gal { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-auto-rows: 170px; gap: 10px; } .gal img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; } .gal img:first-child { grid-row: span 2; }
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; text-align: center; } .facts div { padding: 16px 8px; border-top: 1.5px solid var(--ink); } .facts b { display: block; font-family: "Cormorant Garamond"; font-size: 2.2rem; line-height: 1; } .facts span { color: var(--muted); font-size: .88rem; }
+  footer { padding: 30px 0 40px; text-align: center; color: var(--muted); font-size: .85rem; }
+  @media (max-width: 820px) { .plans, .calwrap { grid-template-columns: 1fr; } .gal { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; } .facts { grid-template-columns: 1fr 1fr; } .plan { min-height: 230px; } .hero { min-height: 520px; } }
+</style>
+</head>
+<body>
+<div class="demo">Demo · ejemplo de web hecho por pola.web — <a href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20la%20demo%20de%20quinta%20y%20quiero%20una%20web%20as%C3%AD" target="_blank" rel="noopener">quiero una así</a></div>
+<header class="hero">
+  <img src="https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=1600&q=80&auto=format&fit=crop" alt="Pileta y casa de la quinta">
+  <div class="wrap nav"><span class="logo">Los Aromos<small>QUINTA · PILAR</small></span><a class="btn ghost" href="#fechas">Ver fechas</a></div>
+  <div class="wrap">
+    <h1>Tu festejo, al aire <i>libre</i>.</h1>
+    <p>Quinta con pileta, parque y quincho para eventos de hasta 100 personas. Mirá qué fechas están libres y consultanos con la tuya.</p>
+    <a class="btn" href="#fechas">Elegir fecha</a>
+  </div>
+</header>
+<main class="wrap">
+  <section class="sec">
+    <h2>Dos maneras de disfrutarla</h2>
+    <div class="plans">
+      <div class="plan"><img src="https://images.unsplash.com/photo-1574482211311-45a2169db57c?w=900&q=80&auto=format&fit=crop" alt="Evento con guirnaldas de luces"><small>Hasta 100 personas</small><h3>Eventos</h3><p>Cumpleaños, 15, casamientos y egresados.</p></div>
+      <div class="plan"><img src="https://images.unsplash.com/photo-1721222204264-ebc41b698276?w=900&q=80&auto=format&fit=crop" alt="Pileta con reposeras"><small>De 10 a 20 h</small><h3>Pasar el día</h3><p>Pileta, parrilla y parque para tu grupo.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="fechas">
+    <h2>Fechas disponibles</h2>
+    <div class="calwrap">
+      <div class="cal">
+        <div class="cal-h"><button id="prev" aria-label="Mes anterior">‹</button><h3 id="mes"></h3><button id="next" aria-label="Mes siguiente">›</button></div>
+        <div class="grid" id="grid"></div>
+        <div class="leg"><span><i style="background:var(--free)"></i>Libre</span><span><i style="background:var(--taken)"></i>Reservada</span></div>
+      </div>
+      <div class="pick">
+        <h3 id="fecha">Elegí una fecha libre</h3>
+        <p>Después elegí el plan y te respondemos con el presupuesto.</p>
+        <div class="opts"><button data-p="Evento">Evento</button><button data-p="Pasar el día">Pasar el día</button></div>
+        <a class="btn" id="go" aria-disabled="true">Consultar esta fecha</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="gal">
+      <img src="https://images.unsplash.com/photo-1721222206130-e26b0349052e?w=1000&q=80&auto=format&fit=crop" alt="Pileta">
+      <img src="https://images.unsplash.com/photo-1524777313293-86d2ab467344?w=600&q=80&auto=format&fit=crop" alt="Mesa decorada con flores">
+      <img src="https://images.unsplash.com/photo-1785744530692-0acb528235d4?w=600&q=80&auto=format&fit=crop" alt="Sillas al aire libre">
+      <img src="https://images.unsplash.com/photo-1762216444731-802dcf3da009?w=600&q=80&auto=format&fit=crop" alt="Parque">
+      <img src="https://images.unsplash.com/photo-1780682571078-242672d1dd59?w=600&q=80&auto=format&fit=crop" alt="Carpa con mesas">
+    </div>
+  </section>
+  <section class="facts">
+    <div><b>100</b><span>personas</span></div><div><b>2 ha</b><span>de parque</span></div><div><b>12 m</b><span>de pileta</span></div><div><b>15'</b><span>del centro de Pilar</span></div>
+  </section>
+  <footer>Los Aromos es un negocio ficticio: esta web es una demo hecha por pola.web.</footer>
+</main>
+<script>
+  const WA = '5491128524241';
+  const $ = (id) => document.getElementById(id);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  let view = new Date(today.getFullYear(), today.getMonth(), 1), sel = null, plan = null;
+  const taken = (d) => { const k = d.getDate() + d.getMonth() * 3; return (d.getDay() === 6 && k % 3 !== 1) || (d.getDay() === 5 && k % 4 === 0) || k % 11 === 0; };
+  const draw = () => {
+    $('mes').textContent = view.toLocaleDateString('es-AR', { month: 'long', year: 'numeric' });
+    const first = (view.getDay() + 6) % 7, n = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+    let h = ['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((x) => `<b>${x}</b>`).join('') + '<span></span>'.repeat(first);
+    for (let i = 1; i <= n; i++) { const d = new Date(view.getFullYear(), view.getMonth(), i); const past = d < today, x = !past && taken(d);
+      const on = sel && +sel === +d; h += `<button data-d="${+d}" class="${past ? 'past' : x ? 'x' : ''} ${on ? 'on' : ''}" ${past || x ? 'disabled' : ''}>${i}</button>`; }
+    $('grid').innerHTML = h; $('prev').disabled = view <= new Date(today.getFullYear(), today.getMonth(), 1);
+  };
+  const upd = () => { const go = $('go');
+    $('fecha').textContent = sel ? sel.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' }) : 'Elegí una fecha libre';
+    document.querySelectorAll('.opts button').forEach((b) => b.classList.toggle('on', b.dataset.p === plan));
+    if (sel && plan) { go.removeAttribute('aria-disabled'); go.target = '_blank'; go.href = `https://wa.me/${WA}?text=` + encodeURIComponent(`Hola Belén, probé la demo de Los Aromos (${plan}, ${$('fecha').textContent}) y quiero una web así para mi quinta`); }
+    else { go.setAttribute('aria-disabled', 'true'); go.removeAttribute('href'); } };
+  $('grid').onclick = (e) => { const b = e.target.closest('button'); if (b && !b.disabled) { sel = new Date(+b.dataset.d); draw(); upd(); } };
+  $('prev').onclick = () => { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); draw(); };
+  $('next').onclick = () => { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); draw(); };
+  document.querySelector('.opts').onclick = (e) => { const b = e.target.closest('button'); if (b) { plan = b.dataset.p; upd(); } };
+  draw(); upd();
+</script>
+</body>
+</html>
