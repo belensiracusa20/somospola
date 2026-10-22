@@ -274,14 +274,29 @@
     .reveal, .rise { opacity: 1; transform: none; transition: none; animation: none; }
 
   }
+
+  /* ── HALLOWEEN 2026 (hasta el 31/10). Para volver: borrar los bloques marcados HALLOWEEN 2026. ── */
+  :root { --salmon: #FF7A1A; --salmon-ink: #D9600A; --powder: #FFD3A8; }
+  .hw-bar { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 41; width: max-content; max-width: calc(100% - 24px); background: #141414; color: #FFF4E9; text-align: center; font-weight: 600; font-size: .92rem; padding: 10px 18px; border-radius: 999px; box-shadow: 0 0 0 1.5px #FF7A1A inset, 0 12px 30px -10px rgba(0,0,0,.6); }
+  .hw-bar a { color: #FF9A4D; border-bottom: 2px solid #FF7A1A; }
+  .logo { position: relative; }
+  .logo .hw-hat { position: absolute; left: -9px; top: -21px; width: 30px; transform: rotate(-14deg); pointer-events: none; }
+  .hero { position: relative; }
+  .hw-bats { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .hw-bats svg { position: absolute; fill: #FF7A1A; opacity: .8; animation: hwfly 5s ease-in-out infinite alternate; }
+  @keyframes hwfly { to { transform: translateY(-16px) rotate(7deg); } }
+  @media (prefers-reduced-motion: reduce) { .hw-bats svg { animation: none; } }
+  @media (max-width: 700px) { .hw-bar .hw-long { display: none; } }
+  /* ── fin HALLOWEEN 2026 ── */
 </style>
 </head>
 <body>
 <a class="skip" href="#contenido">Ir al contenido</a>
+<!-- HALLOWEEN 2026 --><div class="hw-bar">🎃 Modo Halloween activado<span class="hw-long"> hasta el 31/10 · ¿Tu web también puede cambiar de look?</span> <a href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20en%20modo%20Halloween" target="_blank" rel="noopener">Escribime</a></div><!-- fin HALLOWEEN 2026 -->
 
 <header id="top">
   <div class="wrap bar">
-    <a class="logo" href="#" aria-label="pola.web, inicio"><svg viewBox="222 299 828 667" fill="#FF6F6F" aria-hidden="true"><rect x="222" y="452" width="188" height="514"/><path d="M452 452 H474 A160 160 0 0 1 474 772 H452 Z"/><path d="M667 824 V299 A205 205 0 0 1 872 504 V824 Z"/><rect x="667" y="855" width="383" height="110"/></svg>pola.web</a>
+    <a class="logo" href="#" aria-label="pola.web, inicio"><!-- HALLOWEEN 2026 --><svg class="hw-hat" viewBox="0 0 200 180" aria-hidden="true"><path d="M70 140 C85 100 95 60 120 20 C128 8 140 4 150 10 C138 18 132 40 128 70 C125 95 128 120 135 140 Z" fill="#FF7A1A"/><path d="M80 128 C100 124 118 124 132 128 L134 140 L76 140 Z" fill="#FFF4E9"/><ellipse cx="102" cy="146" rx="96" ry="20" fill="#FF7A1A"/></svg><!-- fin HALLOWEEN 2026 --><svg viewBox="222 299 828 667" fill="#FF7A1A" aria-hidden="true"><rect x="222" y="452" width="188" height="514"/><path d="M452 452 H474 A160 160 0 0 1 474 772 H452 Z"/><path d="M667 824 V299 A205 205 0 0 1 872 504 V824 Z"/><rect x="667" y="855" width="383" height="110"/></svg>pola.web</a>
     <nav aria-label="Secciones"><a href="#proyectos">Proyectos</a><a href="#ejemplos">Ejemplos</a><a href="#servicios">Servicios</a><a href="#como">Quién soy</a><a href="#preguntas">Preguntas</a></nav>
     <a class="pill salmon small" href="https://wa.me/5491128524241?text=Hola%20Bel%C3%A9n%2C%20vi%20tu%20web%20y%20quiero%20contarte%20mi%20idea" target="_blank" rel="noopener">Escribime</a>
   </div>
@@ -289,6 +304,7 @@
 
 <main id="contenido">
   <section class="hero">
+    <!-- HALLOWEEN 2026 --><div class="hw-bats" aria-hidden="true"><svg viewBox="0 0 100 40" style="left:46%;top:9%;width:70px"><path d="M50 22 L46.5 11 L44.5 19 C37 9 20 4 1 10 C9 15 11 21 9 29 C15 25.5 21 26 25 32 C29 27.5 35 27.5 39 33.5 C42.5 29.5 46 30 50 37 C54 30 57.5 29.5 61 33.5 C65 27.5 71 27.5 75 32 C79 26 85 25.5 91 29 C89 21 91 15 99 10 C80 4 63 9 55.5 19 L53.5 11 Z"/></svg><svg viewBox="0 0 100 40" style="left:58%;top:4%;width:44px;animation-delay:-1.5s"><path d="M50 22 L46.5 11 L44.5 19 C37 9 20 4 1 10 C9 15 11 21 9 29 C15 25.5 21 26 25 32 C29 27.5 35 27.5 39 33.5 C42.5 29.5 46 30 50 37 C54 30 57.5 29.5 61 33.5 C65 27.5 71 27.5 75 32 C79 26 85 25.5 91 29 C89 21 91 15 99 10 C80 4 63 9 55.5 19 L53.5 11 Z"/></svg><svg viewBox="0 0 100 40" style="right:4%;top:14%;width:56px;animation-delay:-3s"><path d="M50 22 L46.5 11 L44.5 19 C37 9 20 4 1 10 C9 15 11 21 9 29 C15 25.5 21 26 25 32 C29 27.5 35 27.5 39 33.5 C42.5 29.5 46 30 50 37 C54 30 57.5 29.5 61 33.5 C65 27.5 71 27.5 75 32 C79 26 85 25.5 91 29 C89 21 91 15 99 10 C80 4 63 9 55.5 19 L53.5 11 Z"/></svg></div><!-- fin HALLOWEEN 2026 -->
     <div class="wrap hero-grid">
       <div>
         <p class="eyebrow rise" style="--d:0">Estudio de webs y sistemas a medida · Pilar, Buenos Aires</p>
@@ -301,7 +317,7 @@
         <p class="note rise" style="--d:320">La primera charla es sin costo.</p>
       </div>
       <div class="art">
-        <img class="belen rise" style="--d:200" src="img/b-muestra.webp" alt="Belén, de pola.web, mostrando un sistema en la notebook" width="1018" height="1400">
+        <!-- HALLOWEEN 2026 (antes: img/b-muestra.webp, 1018x1400, alt «Belén, de pola.web, mostrando un sistema en la notebook») --><img class="belen rise" style="--d:200" src="img/b-brujita.webp" alt="Belén, de pola.web, disfrazada de brujita para Halloween" width="700" height="1050">
         <p class="hello hand rise" style="--d:900">hola, soy Belén<svg viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 6 C 20 4, 38 12, 48 30"/><path d="M38 28 L 49 32 L 50 20"/></svg></p>
                 <div class="float b rise" style="--d:720"><span class="ok">✓ Pago registrado</span><br>Marta Gómez</div>
         <div class="float c rise" style="--d:840">Comprobante listo<br><b>Enviar por WhatsApp</b></div>
